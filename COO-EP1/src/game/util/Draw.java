@@ -68,6 +68,46 @@ public class Draw {
 		drawLine(x3, y3, x4, y4);
 		drawLine(x4, y4, x1, y1);
 	}
+	
+	public static void drawSquare(double x, double y, double radius) {
+
+		int x1 = (int) Math.round(x);
+		int y1 = (int) Math.round(y);
+
+		int x2 = (int) Math.round(x + radius);
+		int y2 = (int) Math.round(y);
+
+		int x3 = (int) Math.round(x + radius);
+		int y3 = (int) Math.round(y + radius);
+
+		int x4 = (int) Math.round(x);
+		int y4 = (int) Math.round(y + radius);
+
+		drawLine(x1, y1, x2, y2);
+		drawLine(x2, y2, x3, y3);
+		drawLine(x3, y3, x4, y4);
+		drawLine(x4, y4, x1, y1);
+	}
+	
+	public static void drawHourglass(double x, double y, double radius) {
+
+		int x1 = (int) Math.round(x);
+		int y1 = (int) Math.round(y);
+
+		int x2 = (int) Math.round(x + radius);
+		int y2 = (int) Math.round(y);
+
+		int x3 = (int) Math.round(x);
+		int y3 = (int) Math.round(y + radius);
+
+		int x4 = (int) Math.round(x + radius);
+		int y4 = (int) Math.round(y + radius);
+
+		drawLine(x1, y1, x2, y2);
+		drawLine(x2, y2, x3, y3);
+		drawLine(x3, y3, x4, y4);
+		drawLine(x4, y4, x1, y1);
+	}
 
 	public static void drawPlayer(double player_X, double player_Y, double radius) {
 
@@ -99,13 +139,13 @@ public class Draw {
 		_g.fillRect((int) x + 5, (int) y + 5, (int) ((width - 10) * lifePointsPercent), height - 10);
 
 	}
-
+	
 	public static void drawTime(int x, int y, int secs) {
 
 		_g.setFont(new Font("Arial", Font.PLAIN, 30));
 		_g.drawString("Tempo", x, y - 10);
 		_g.drawString(Integer.toString(secs), x, y + 20);
-	}
+	} 
 
 	public static void fillRect(double cx, double cy, double width, double height) {
 
