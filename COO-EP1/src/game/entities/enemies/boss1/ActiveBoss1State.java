@@ -38,11 +38,9 @@ public class ActiveBoss1State implements EntityState {
 			double angle = context.getAngle();
 
 			if (context.getPosition().getX() <= 0) {
-				System.out.println("\tAtualizou o sentido: "+counterGoes);
 				counterGoes++;
 			}
 			if ((context.getPosition().getX()+context.getRadius()) >= GameLib.WIDTH) {
-				System.out.println("\tAtualizou o sentido: "+counterGoes);
 				counterGoes++;
 			}
 
