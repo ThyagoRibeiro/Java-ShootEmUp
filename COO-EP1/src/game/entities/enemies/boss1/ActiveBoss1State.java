@@ -11,6 +11,7 @@ public class ActiveBoss1State implements EntityState {
 
 	private Boss1 context;
 	private LocalTime shootTime;
+	private int counterGoes;
 
 	private double waitTime;
 
@@ -18,6 +19,7 @@ public class ActiveBoss1State implements EntityState {
 		waitTime = 1000;
 		this.context = context;
 		shootTime = new LocalTime(Math.random() * waitTime);
+		counterGoes = 0;
 	}
 
 	@Override
@@ -28,25 +30,24 @@ public class ActiveBoss1State implements EntityState {
 
 	@Override
 	public void Update() {
-
 		if (context.getPosition().getY() <= 0) {
-			context.setPosition(new Vector2D(0, 150));
+			context.setPosition(new Vector2D(1, 150));
 		} else {
 			float curX = context.getPosition().getX();
 			float curY = context.getPosition().getY();
 			double angle = context.getAngle();
 
-			boolean flagLeftWay = false;
-
 			if (context.getPosition().getX() <= 0) {
-				flagLeftWay = false;
-			} else {
-				if (context.getPosition().getX() + context.getRadius() >= GameLib.WIDTH) {
-					flagLeftWay = true;
-				}
+				System.out.println("\tAtualizou o sentido: "+counterGoes);
+				counterGoes++;
+			}
+			if ((context.getPosition().getX()+context.getRadius()) >= GameLib.WIDTH) {
+				System.out.println("\tAtualizou o sentido: "+counterGoes);
+				counterGoes++;
 			}
 
-			if (flagLeftWay) {
+
+			if (counterGoes%2 == 1) {
 				// System.out.println("indo p/ esq");
 				curX += context.getVelocity().getX() * Math.sin(angle) * Time.getInstance().DeltaTime();
 			} else {
