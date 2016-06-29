@@ -48,10 +48,8 @@ public class ActiveBoss1State implements EntityState {
 
 
 			if (counterGoes%2 == 1) {
-				// System.out.println("indo p/ esq");
 				curX += context.getVelocity().getX() * Math.sin(angle) * Time.getInstance().DeltaTime();
 			} else {
-				// System.out.println("indo p/ dir");
 				curX -= context.getVelocity().getX() * Math.sin(angle) * Time.getInstance().DeltaTime();
 			}
 
