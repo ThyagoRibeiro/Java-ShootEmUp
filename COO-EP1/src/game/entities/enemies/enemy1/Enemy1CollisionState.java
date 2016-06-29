@@ -19,7 +19,7 @@ public class Enemy1CollisionState implements CollisionState {
 		if (collider.getEntityType() == EntityType.FriendlyProjectile) {
 			collider.Remove();
 			_context.setState(new ExplodingState(_context, 400));
-			((MainGameScreen)_context.getScreenState()).enemyDied();
+			((MainGameScreen) _context.getScreenState()).enemyDied();
 
 		}
 	}

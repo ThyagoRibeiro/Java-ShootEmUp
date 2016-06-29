@@ -8,7 +8,7 @@ import game.screenstate.ScreenState;
 import geometry.Vector2D;
 
 public class Enemy1 extends Enemy {
-	
+
 	public Enemy1(Vector2D position, ScreenState screenState, MainGameScreen mainGameScreen) {
 		super(position, new Vector2D((float) (0.05 + Math.random() * 0.10), (float) (0.05 + Math.random() * 0.10)), 9.0,
 				screenState, 3 * Math.PI / 2, 0.0);

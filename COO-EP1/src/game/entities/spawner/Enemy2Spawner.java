@@ -10,7 +10,7 @@ import geometry.Vector2D;
 public class Enemy2Spawner extends EntitySpawner {
 
 	MainGameScreen mainGameScreen;
-	
+
 	public Enemy2Spawner(SpawnManager _spawnManager, int when, int x, int y) {
 		super(_spawnManager, when, x, y);
 	}
