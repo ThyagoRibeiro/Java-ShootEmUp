@@ -17,7 +17,7 @@ public class Enemy1Spawner extends EntitySpawner {
 
 	@Override
 	protected Entity Spawn(int x, int y) {
-		Enemy1 enemy = new Enemy1(new Vector2D(x, y + 100), _spawnManager.getScreenState(), mainGameScreen);
+		Enemy1 enemy = new Enemy1(new Vector2D(x, y), _spawnManager.getScreenState(), mainGameScreen);
 		enemy.setWeapon(WeaponsFactory.CreateWeapon(WeaponType.Basic, enemy));
 		return enemy;
 	}

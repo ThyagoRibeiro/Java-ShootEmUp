@@ -13,7 +13,7 @@ public class Boss1Spawner extends EntitySpawner {
 	private MainGameScreen mainGameScreen;
 
 	public Boss1Spawner(SpawnManager _spawnManager, int when, int x, int y, int healthPoints) {
-		super(_spawnManager, when, x, y);
+		super(_spawnManager, when, x, y + 120);
 		this.healthPoints = healthPoints;
 	}
 

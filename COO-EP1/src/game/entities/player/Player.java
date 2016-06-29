@@ -6,18 +6,21 @@ import game.GameLib;
 import game.entities.Entity;
 import game.entities.collision.Collidable;
 import game.entities.collision.CollisionChecker;
+import game.entities.hud.Infos;
 import game.entities.hud.LifeBar;
 import game.entities.weapons.Weapon;
 import game.screenstate.ScreenState;
+import game.util.Time;
 import geometry.Vector2D;
 
 public class Player extends Entity implements Collidable {
 
 	protected LifeBar _lifeBar;
+	protected Infos infos;
 	protected Weapon _weapon;
 	protected Color normalColor = Color.BLUE, getHitColor = Color.WHITE, currentColor;
 
-	public Player(Vector2D position, Vector2D velocity, double radius, ScreenState screenState, int healthPoints) {
+	public Player(Vector2D position, Vector2D velocity, double radius, ScreenState screenState, int healthPoints, int stageNumber) {
 
 		super(position, velocity, radius, screenState);
 		position.setXY((GameLib.WIDTH - (float) radius) / 2.0f, GameLib.HEIGHT * 0.9f);
@@ -29,6 +32,8 @@ public class Player extends Entity implements Collidable {
 		currentColor = normalColor;
 		this._type = EntityType.Player;
 		_lifeBar = new LifeBar(healthPoints, this);
+		infos = new Infos(this, stageNumber);
+
 	}
 
 	@Override

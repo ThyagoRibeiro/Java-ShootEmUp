@@ -81,6 +81,24 @@ public class Draw {
 
 	}
 
+	public static void drawTwoStrings(String text1, String text2, int x, int y) {
+		
+		_g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
+	    int x2 = (x + _g.getFontMetrics().stringWidth(text1)/2) - 2;
+		
+		setColor(Color.WHITE);
+		_g.drawString(text1, x, y - 10);
+		_g.drawString(text2, x2, y + 15);
+	}
+
+	public static void drawPowerUp(String text, float x, float y, Font f) {
+		_g.drawString(text, (int) x, (int) y);
+	}
+
+	public static void drawPowerUpActive(String text, float x, float y, Font f) {
+		_g.drawString(text, (int) x, (int) y);
+	}
+
 	public static void drawLine(double x1, double y1, double x2, double y2) {
 
 		_g.drawLine((int) Math.round(x1), (int) Math.round(y1), (int) Math.round(x2), (int) Math.round(y2));

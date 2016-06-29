@@ -3,6 +3,7 @@ package game.screenstate;
 import java.util.ArrayList;
 
 import game.entities.backgroundstar.BackgroundStar;
+import game.entities.hud.Infos;
 import game.entities.player.Player;
 import game.entities.spawner.Boss1Spawner;
 import game.entities.spawner.Boss2Spawner;
@@ -11,6 +12,7 @@ import game.entities.spawner.Enemy2Spawner;
 import game.entities.spawner.SpawnManager;
 import game.entities.weapons.WeaponsFactory;
 import game.util.LocalTime;
+import game.util.Time;
 import geometry.Vector2D;
 import stage.BossSpawn;
 import stage.EnemySpawn;
@@ -35,7 +37,6 @@ public class MainGameScreen extends ScreenState {
 
 	@Override
 	public void Draw(ScreenContext context) {
-
 		_entityManager.RenderEntities();
 	}
 
@@ -54,9 +55,9 @@ public class MainGameScreen extends ScreenState {
 	public void OnEnter(ScreenContext context) {
 
 		_spawnManager = new SpawnManager(this);
-		_player = new Player(new Vector2D(25.0f, 600.0f), new Vector2D(0.3f, 0.2f), 9.0f, this, playerHealthPoints);
+		_player = new Player(new Vector2D(25.0f, 600.0f), new Vector2D(0.3f, 0.2f), 9.0f, this, playerHealthPoints, stageNumber + 1);
 		_player.setWeapon(WeaponsFactory.CreateWeapon(WeaponsFactory.WeaponType.Basic2, _player));
-
+		
 		for (EnemySpawn enemy : stages.get(stageNumber).getEnemiesSpawn()) {
 
 			if (enemy.getType() == 1)
@@ -82,10 +83,10 @@ public class MainGameScreen extends ScreenState {
 		for (PowerUpSpawn powerup : stages.get(stageNumber).getPowerUpsSpawn()) {
 
 			// if (powerup.getType() == 1)
-			// new Enemy2Spawner(_spawnManager, powerup.getWhen(),
+			// new PowerUp1Spawner(_spawnManager, powerup.getWhen(),
 			// powerup.getX(), powerup.getY());
 			// else
-			// new Enemy2Spawner(_spawnManager, powerup.getWhen(),
+			// new PowerUp2Spawner(_spawnManager, powerup.getWhen(),
 			// powerup.getX(), powerup.getY());
 
 		}
