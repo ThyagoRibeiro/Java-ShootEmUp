@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import game.entities.backgroundstar.BackgroundStar;
 import game.entities.player.Player;
 import game.entities.spawner.Boss1Spawner;
+import game.entities.spawner.Boss2Spawner;
 import game.entities.spawner.Enemy1Spawner;
 import game.entities.spawner.Enemy2Spawner;
 import game.entities.spawner.SpawnManager;
@@ -20,14 +21,10 @@ public class MainGameScreen extends ScreenState {
 
 	Player _player;
 	private SpawnManager _spawnManager;
+	private boolean bossIsDead;
 	private LocalTime ltime = null;
 	private int playerHealthPoints, numberOfEnemies, stageNumber;
 	private ArrayList<Stage> stages;
-	private boolean bossIsDead;
-
-	public void setBossIsDead(boolean bossIsDead) {
-		this.bossIsDead = bossIsDead;
-	}
 
 	public MainGameScreen(int playerHealthPoints, ArrayList<Stage> stages, int stageNumber) {
 		super();
@@ -40,6 +37,17 @@ public class MainGameScreen extends ScreenState {
 	public void Draw(ScreenContext context) {
 
 		_entityManager.RenderEntities();
+	}
+
+	public void enemyDied() {
+		numberOfEnemies--;
+		System.out.println(numberOfEnemies);
+	}
+
+	public SpawnManager getSpawnManager() {
+
+		return _spawnManager;
+
 	}
 
 	@Override
@@ -65,9 +73,8 @@ public class MainGameScreen extends ScreenState {
 
 			if (boss.getType() == 1)
 				new Boss1Spawner(_spawnManager, boss.getWhen(), boss.getX(), boss.getY(), boss.getHealthPoints());
-			// else
-			// new Boss2Spawner(_spawnManager, boss.getWhen(), boss.getX(),
-			// boss.getY());
+			else
+				new Boss2Spawner(_spawnManager, boss.getWhen(), boss.getX(), boss.getY(), boss.getHealthPoints());
 
 			numberOfEnemies++;
 		}
@@ -87,21 +94,14 @@ public class MainGameScreen extends ScreenState {
 		SetupBackground();
 	}
 
-	public SpawnManager getSpawnManager() {
-
-		return _spawnManager;
-
-	}
-
-	public void enemyDied() {
-		numberOfEnemies--;
-		System.out.println(numberOfEnemies);
-	}
-
 	@Override
 	public void OnLeave(ScreenContext context) {
 		_entityManager.ClearAll();
 		_spawnManager.ClearAll();
+	}
+
+	public void setBossIsDead(boolean bossIsDead) {
+		this.bossIsDead = bossIsDead;
 	}
 
 	private void SetupBackground() {

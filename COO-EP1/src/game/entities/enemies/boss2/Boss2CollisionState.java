@@ -1,4 +1,4 @@
-package game.entities.enemies.boss1;
+package game.entities.enemies.boss2;
 
 import game.entities.Entity;
 import game.entities.Entity.EntityType;
@@ -6,11 +6,11 @@ import game.entities.collision.CollisionState;
 import game.entities.state.ExplodingState;
 import game.screenstate.MainGameScreen;
 
-public class Boss1CollisionState implements CollisionState {
+public class Boss2CollisionState implements CollisionState {
 
-	private Boss1 _context;
+	private Boss2 _context;
 
-	public Boss1CollisionState(Boss1 context) {
+	public Boss2CollisionState(Boss2 context) {
 		this._context = context;
 	}
 

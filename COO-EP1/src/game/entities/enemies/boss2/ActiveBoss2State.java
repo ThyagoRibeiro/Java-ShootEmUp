@@ -1,4 +1,4 @@
-package game.entities.enemies.boss1;
+package game.entities.enemies.boss2;
 
 import game.GameLib;
 import game.entities.state.EntityState;
@@ -7,15 +7,15 @@ import game.util.LocalTime;
 import game.util.Time;
 import geometry.Vector2D;
 
-public class ActiveBoss1State implements EntityState {
+public class ActiveBoss2State implements EntityState {
 
-	private Boss1 context;
+	private Boss2 context;
 	private int counterGoes;
 	private LocalTime shootTime;
 
 	private double waitTime;
 
-	public ActiveBoss1State(Boss1 context) {
+	public ActiveBoss2State(Boss2 context) {
 		waitTime = 1000;
 		this.context = context;
 		shootTime = new LocalTime(Math.random() * waitTime);
@@ -38,17 +38,11 @@ public class ActiveBoss1State implements EntityState {
 			double angle = context.getAngle();
 
 			if (context.getPosition().getX() <= 0) {
-<<<<<<< HEAD
-				counterGoes++;
-			}
-			if ((context.getPosition().getX()+context.getRadius()) >= GameLib.WIDTH) {
-=======
 //				System.out.println("\tAtualizou o sentido: " + counterGoes);
 				counterGoes++;
 			}
 			if ((context.getPosition().getX() + context.getRadius()) >= GameLib.WIDTH) {
 //				System.out.println("\tAtualizou o sentido: " + counterGoes);
->>>>>>> origin/master
 				counterGoes++;
 			}
 

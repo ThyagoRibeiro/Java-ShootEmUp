@@ -44,8 +44,8 @@ public class Stage {
 	public int getStageNumber() {
 		return stageNumber;
 	}
-	
-	public void removeBossSpawn(){
+
+	public void removeBossSpawn() {
 		bossSpawn = null;
 	}
 
