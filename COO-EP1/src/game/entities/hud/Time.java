@@ -14,9 +14,8 @@ public class Time extends Entity {
 		this._type = EntityType.HUD;
 	}
 
-	@Override
-	public void Update() {
-		this._state.Update();
+	public int getTime() {
+		return secs;
 	}
 
 	@Override
@@ -24,8 +23,9 @@ public class Time extends Entity {
 		this._state.Render();
 	}
 
-	public int getTime() {
-		return secs;
+	@Override
+	public void Update() {
+		this._state.Update();
 	}
 
 }

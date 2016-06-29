@@ -23,6 +23,12 @@ public class ActiveEnemy1State implements EntityState {
 	}
 
 	@Override
+	public void Render() {
+		Draw.setColor(Color.CYAN);
+		Draw.drawCircle(context.getPosition().getX(), context.getPosition().getY(), context.getRadius());
+	}
+
+	@Override
 	public void Update() {
 		if (context.getPosition().getY() > GameLib.HEIGHT + 10) {
 			context.Remove();
@@ -40,11 +46,5 @@ public class ActiveEnemy1State implements EntityState {
 			context.Shoot();
 			shootTime.Start(Math.random() * waitTime);
 		}
-	}
-
-	@Override
-	public void Render() {
-		Draw.setColor(Color.CYAN);
-		Draw.drawCircle(context.getPosition().getX(), context.getPosition().getY(), context.getRadius());
 	}
 }

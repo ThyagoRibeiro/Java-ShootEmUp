@@ -7,9 +7,9 @@ import game.util.Time;
 
 public class ExplodingState implements EntityState {
 
-	private LocalTime localTime;
-
 	private Entity context;
+
+	private LocalTime localTime;
 
 	public ExplodingState(Entity context, double duration) {
 		this.context = context;
@@ -18,16 +18,16 @@ public class ExplodingState implements EntityState {
 	}
 
 	@Override
-	public void Update() {
-		if (localTime.hasEnded())
-			context.Remove();
-	}
-
-	@Override
 	public void Render() {
 		double alpha = (Time.getInstance().CurrentTime() - localTime.getStart())
 				/ (localTime.getEnd() - localTime.getStart());
 		Draw.drawExplosion(context.getPosition().getX(), context.getPosition().getY(), alpha);
+	}
+
+	@Override
+	public void Update() {
+		if (localTime.hasEnded())
+			context.Remove();
 	}
 
 }

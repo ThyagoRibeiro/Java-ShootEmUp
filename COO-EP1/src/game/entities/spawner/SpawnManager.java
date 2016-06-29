@@ -6,10 +6,10 @@ import game.screenstate.ScreenState;
 
 public class SpawnManager {
 
-	private ArrayList<EntitySpawner> _spawner;
-	private ArrayList<EntitySpawner> _toadd;
-
 	private ScreenState _screenState;
+	private ArrayList<EntitySpawner> _spawner;
+
+	private ArrayList<EntitySpawner> _toadd;
 
 	public SpawnManager(ScreenState screenState) {
 		_spawner = new ArrayList<EntitySpawner>();
@@ -19,6 +19,15 @@ public class SpawnManager {
 
 	public void Add(EntitySpawner spawner) {
 		_toadd.add(spawner);
+	}
+
+	public void ClearAll() {
+		_spawner.clear();
+		_toadd.clear();
+	}
+
+	public ScreenState getScreenState() {
+		return this._screenState;
 	}
 
 	public void Update() {
@@ -31,14 +40,5 @@ public class SpawnManager {
 		for (EntitySpawner es : _spawner) {
 			es.Update();
 		}
-	}
-
-	public void ClearAll() {
-		_spawner.clear();
-		_toadd.clear();
-	}
-
-	public ScreenState getScreenState() {
-		return this._screenState;
 	}
 }

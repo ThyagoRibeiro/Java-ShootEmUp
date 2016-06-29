@@ -10,14 +10,14 @@ import game.util.Draw;
 
 public class EntityManager {
 
+	private ArrayList<Entity> _collideableEntities = new ArrayList<Entity>();
+
+	private ArrayList<Entity> _hudEntities = new ArrayList<Entity>();
+	private ArrayList<Entity> _normalEntities = new ArrayList<Entity>();
 	private Player _player;
 
-	private ArrayList<Entity> _collideableEntities = new ArrayList<Entity>();
-	private ArrayList<Entity> _normalEntities = new ArrayList<Entity>();
-	private ArrayList<Entity> _hudEntities = new ArrayList<Entity>();
-
-	private ArrayList<Entity> _toremove = new ArrayList<Entity>();
 	private ArrayList<Entity> _toadd = new ArrayList<Entity>();
+	private ArrayList<Entity> _toremove = new ArrayList<Entity>();
 
 	public EntityManager() {
 		_player = null;
@@ -33,12 +33,16 @@ public class EntityManager {
 		_toadd.add(entity);
 	}
 
-	public void Remove(Entity entity) {
-		_toremove.add(entity);
-	}
-
-	public void setPlayer(Player player) {
-		_player = player;
+	public void CheckForCollisions() {
+		for (Entity ent1 : _collideableEntities) {
+			Collidable col1 = (Collidable) ent1;
+			for (Entity ent2 : _collideableEntities) {
+				if (col1.CheckCollision(ent2)) {
+					if (ent1._collision != null)
+						ent1._collision.OnCollision(ent2);
+				}
+			}
+		}
 	}
 
 	public void ClearAll() {
@@ -47,6 +51,35 @@ public class EntityManager {
 		_hudEntities.clear();
 		_toremove.clear();
 		_player = null;
+	}
+
+	public boolean isPlayerDead() {
+		return _player == null;
+	}
+
+	public void Remove(Entity entity) {
+		_toremove.add(entity);
+	}
+
+	public void RenderEntities() {
+		for (Entity entity : _normalEntities) {
+			entity.Render();
+		}
+
+		for (Entity entity : _collideableEntities) {
+			entity.Render();
+		}
+
+		Draw.setColor(Color.BLACK);
+		Draw.fillRect(0, 0, 480, 100);
+
+		for (Entity entity : _hudEntities) {
+			entity.Render();
+		}
+	}
+
+	public void setPlayer(Player player) {
+		_player = player;
 	}
 
 	public void UpdateEntities() {
@@ -80,38 +113,5 @@ public class EntityManager {
 			}
 		}
 
-	}
-
-	public void CheckForCollisions() {
-		for (Entity ent1 : _collideableEntities) {
-			Collidable col1 = (Collidable) ent1;
-			for (Entity ent2 : _collideableEntities) {
-				if (col1.CheckCollision(ent2)) {
-					if (ent1._collision != null)
-						ent1._collision.OnCollision(ent2);
-				}
-			}
-		}
-	}
-
-	public void RenderEntities() {
-		for (Entity entity : _normalEntities) {
-			entity.Render();
-		}
-		
-		for (Entity entity : _collideableEntities) {
-			entity.Render();
-		}
-
-		Draw.setColor(Color.BLACK);
-		Draw.fillRect(0, 0, 480, 100);
-
-		for (Entity entity : _hudEntities) {
-			entity.Render();
-		}
-	}
-
-	public boolean isPlayerDead() {
-		return _player == null;
 	}
 }

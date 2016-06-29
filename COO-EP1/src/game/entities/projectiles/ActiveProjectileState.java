@@ -16,13 +16,6 @@ public class ActiveProjectileState implements EntityState {
 	}
 
 	@Override
-	public void Update() {
-		context.UpdatePosition();
-		if (context.getPosition().getY() < -5 || context.getPosition().getY() > GameLib.HEIGHT + 5)
-			context.Remove();
-	}
-
-	@Override
 	public void Render() {
 		if (context.getEntityType() == EntityType.FriendlyProjectile) {
 			Draw.setColor(Color.GREEN);
@@ -36,5 +29,12 @@ public class ActiveProjectileState implements EntityState {
 			Draw.setColor(Color.RED);
 			Draw.drawCircle(context.getPosition().getX(), context.getPosition().getY(), context.getRadius());
 		}
+	}
+
+	@Override
+	public void Update() {
+		context.UpdatePosition();
+		if (context.getPosition().getY() < -5 || context.getPosition().getY() > GameLib.HEIGHT + 5)
+			context.Remove();
 	}
 }

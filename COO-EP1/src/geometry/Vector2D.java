@@ -12,33 +12,28 @@ public class Vector2D {
 		this._coordY = y;
 	}
 
-	public float getX() {
-		return _coordX;
-	}
-
-	public float getY() {
-		return _coordY;
-	}
-
-	public void setX(float _coordX) {
-		this._coordX = _coordX;
-	}
-
-	public void setY(float _coordY) {
-		this._coordY = _coordY;
-	}
-
-	public void setXY(float x, float y) {
-		this._coordX = x;
-		this._coordY = y;
+	public Vector2D Add(float addx, float addy) {
+		return new Vector2D(this._coordX + addx, this._coordY + addy);
 	}
 
 	public Vector2D Add(Vector2D toadd) {
 		return new Vector2D(this._coordX + toadd._coordX, this._coordY + toadd._coordY);
 	}
 
-	public Vector2D Add(float addx, float addy) {
-		return new Vector2D(this._coordX + addx, this._coordY + addy);
+	public double Distance(Vector2D other) {
+		double dx = other.getX() - this.getX();
+		double dy = other.getY() - this.getY();
+		double dist = Math.sqrt(dx * dx + dy * dy);
+
+		return dist;
+	}
+
+	public float getX() {
+		return _coordX;
+	}
+
+	public float getY() {
+		return _coordY;
 	}
 
 	public Vector2D Multiply(float factor) {
@@ -49,12 +44,17 @@ public class Vector2D {
 		return new Vector2D(this._coordX * factorx, this._coordY * factory);
 	}
 
-	public double Distance(Vector2D other) {
-		double dx = other.getX() - this.getX();
-		double dy = other.getY() - this.getY();
-		double dist = Math.sqrt(dx * dx + dy * dy);
+	public void setX(float _coordX) {
+		this._coordX = _coordX;
+	}
 
-		return dist;
+	public void setXY(float x, float y) {
+		this._coordX = x;
+		this._coordY = y;
+	}
+
+	public void setY(float _coordY) {
+		this._coordY = _coordY;
 	}
 
 	public void setYToNegative() {

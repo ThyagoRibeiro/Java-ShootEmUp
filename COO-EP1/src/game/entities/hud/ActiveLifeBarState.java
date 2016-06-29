@@ -15,19 +15,18 @@ public class ActiveLifeBarState implements EntityState {
 	}
 
 	@Override
-	public void Update() {
-
-	}
-
-	@Override
 	public void Render() {
-		
-		if (context.getCharacterType().equals(EntityType.Player)){
+		if (context.getCharacterType().equals(EntityType.Player)) {
 			Draw.setColor(Color.BLUE);
 			Draw.drawLifeBar(10, 70, 150, 30, context.getLifePointsPercent(), "Player");
 		} else {
 			Draw.setColor(Color.RED);
 			Draw.drawLifeBar(320, 70, 150, 30, context.getLifePointsPercent(), "Boss");
 		}
+	}
+
+	@Override
+	public void Update() {
+
 	}
 }

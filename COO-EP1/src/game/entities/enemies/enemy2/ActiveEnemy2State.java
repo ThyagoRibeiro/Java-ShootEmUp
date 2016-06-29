@@ -16,6 +16,12 @@ public class ActiveEnemy2State implements EntityState {
 	}
 
 	@Override
+	public void Render() {
+		Draw.setColor(Color.MAGENTA);
+		Draw.drawDiamond(context.getPosition().getX(), context.getPosition().getY(), context.getRadius());
+	}
+
+	@Override
 	public void Update() {
 
 		if (context.getPosition().getX() < -10 || context.getPosition().getX() > GameLib.WIDTH + 10) {
@@ -61,12 +67,6 @@ public class ActiveEnemy2State implements EntityState {
 			}
 		}
 
-	}
-
-	@Override
-	public void Render() {
-		Draw.setColor(Color.yellow);
-		Draw.drawDiamond(context.getPosition().getX(), context.getPosition().getY(), context.getRadius());
 	}
 
 }

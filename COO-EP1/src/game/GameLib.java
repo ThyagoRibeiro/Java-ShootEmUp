@@ -34,66 +34,25 @@ import game.util.Draw;
 
 public class GameLib {
 
-	public static final int WIDTH = 480;
-	public static final int HEIGHT = 820;
-
-	public static final int KEY_UP = 0;
-	public static final int KEY_DOWN = 1;
-	public static final int KEY_LEFT = 2;
-	public static final int KEY_RIGHT = 3;
-	public static final int KEY_CONTROL = 4;
-	public static final int KEY_ESCAPE = 5;
-
 	private static MyFrame frame = null;
 	private static Graphics2D g = null;
+
+	public static final int HEIGHT = 820;
+	public static final int KEY_CONTROL = 4;
+	public static final int KEY_DOWN = 1;
+	public static final int KEY_ESCAPE = 5;
+	public static final int KEY_LEFT = 2;
+	public static final int KEY_RIGHT = 3;
+
+	public static final int KEY_UP = 0;
 	private static MyKeyAdapter keyboard = null;
+	public static final int WIDTH = 480;
 
-	public static void initGraphics() {
+	public static void debugKeys() {
 
-		frame = new MyFrame("EP COO - Shoot'em up");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(WIDTH, HEIGHT);
-		frame.setResizable(false);
-		frame.setVisible(true);
-		frame.setLocationRelativeTo(null);
-
-		keyboard = new MyKeyAdapter();
-		frame.addKeyListener(keyboard);
-		frame.requestFocus();
-
-		frame.createBufferStrategy(2);
-		g = (Graphics2D) frame.getBufferStrategy().getDrawGraphics();					
-		
-		Draw.setGraphics(g);
+		keyboard.debug();
 	}
 
-	public static void setColor(Color c) {
-		g.setColor(c);
-	}
-
-	public static void drawString(String letra, double posX, double posY) {
-		g.drawString(letra, (int) posX - 2, (int) posY + 2);
-	}
-
-	public static void drawLine(double x1, double y1, double x2, double y2) {
-
-		g.drawLine((int) Math.round(x1), (int) Math.round(y1), (int) Math.round(x2), (int) Math.round(y2));
-	}
-
-	public static void drawRec(double x, double y, double radius) {
-		g.drawRect((int) x, (int) y, (int) radius, (int) radius);
-	}
-
-	public static void drawCircle(double cx, double cy, double radius) {
-
-		int x = (int) Math.round(cx - radius);
-		int y = (int) Math.round(cy - radius);
-		int width = (int) Math.round(2 * radius);
-		int height = (int) Math.round(2 * radius);
-
-		g.drawOval(x, y, width, height);
-	}
-	
 	public static void display() {
 
 		g.dispose();
@@ -109,14 +68,55 @@ public class GameLib {
 		g.setColor(Color.WHITE);
 	}
 
+	public static void drawCircle(double cx, double cy, double radius) {
+
+		int x = (int) Math.round(cx - radius);
+		int y = (int) Math.round(cy - radius);
+		int width = (int) Math.round(2 * radius);
+		int height = (int) Math.round(2 * radius);
+
+		g.drawOval(x, y, width, height);
+	}
+
+	public static void drawLine(double x1, double y1, double x2, double y2) {
+
+		g.drawLine((int) Math.round(x1), (int) Math.round(y1), (int) Math.round(x2), (int) Math.round(y2));
+	}
+
+	public static void drawRec(double x, double y, double radius) {
+		g.drawRect((int) x, (int) y, (int) radius, (int) radius);
+	}
+
+	public static void drawString(String letra, double posX, double posY) {
+		g.drawString(letra, (int) posX - 2, (int) posY + 2);
+	}
+
+	public static void initGraphics() {
+
+		frame = new MyFrame("EP COO - Shoot'em up");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setSize(WIDTH, HEIGHT);
+		frame.setResizable(false);
+		frame.setVisible(true);
+		frame.setLocationRelativeTo(null);
+
+		keyboard = new MyKeyAdapter();
+		frame.addKeyListener(keyboard);
+		frame.requestFocus();
+
+		frame.createBufferStrategy(2);
+		g = (Graphics2D) frame.getBufferStrategy().getDrawGraphics();
+
+		Draw.setGraphics(g);
+	}
+
 	public static boolean iskeyPressed(int index) {
 
 		return keyboard.isKeyPressed(index);
 	}
 
-	public static void debugKeys() {
-
-		keyboard.debug();
+	public static void setColor(Color c) {
+		g.setColor(c);
 	}
 }
 
@@ -128,13 +128,16 @@ class MyFrame extends JFrame {
 		super(title);
 	}
 
+	@Override
 	public void paint(Graphics g) {
 	}
 
-	public void update(Graphics g) {
+	@Override
+	public void repaint() {
 	}
 
-	public void repaint() {
+	@Override
+	public void update(Graphics g) {
 	}
 }
 
@@ -152,6 +155,12 @@ class MyKeyAdapter extends KeyAdapter {
 		releaseTimeStamps = new long[codes.length];
 	}
 
+	public void debug() {
+
+		for (int i = 0; i < codes.length; i++) {
+		}
+	}
+
 	public int getIndexFromKeyCode(int keyCode) {
 
 		for (int i = 0; i < codes.length; i++) {
@@ -161,27 +170,6 @@ class MyKeyAdapter extends KeyAdapter {
 		}
 
 		return -1;
-	}
-
-	public void keyPressed(KeyEvent e) {
-
-		int index = getIndexFromKeyCode(e.getKeyCode());
-
-		if (index >= 0) {
-
-			keyStates[index] = true;
-		}
-	}
-
-	public void keyReleased(KeyEvent e) {
-
-		int index = getIndexFromKeyCode(e.getKeyCode());
-
-		if (index >= 0) {
-
-			keyStates[index] = false;
-			releaseTimeStamps[index] = System.currentTimeMillis();
-		}
 	}
 
 	public boolean isKeyPressed(int index) {
@@ -198,10 +186,27 @@ class MyKeyAdapter extends KeyAdapter {
 		return true;
 	}
 
-	public void debug() {
+	@Override
+	public void keyPressed(KeyEvent e) {
 
-		for (int i = 0; i < codes.length; i++) {
+		int index = getIndexFromKeyCode(e.getKeyCode());
+
+		if (index >= 0) {
+
+			keyStates[index] = true;
 		}
 	}
-	
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+
+		int index = getIndexFromKeyCode(e.getKeyCode());
+
+		if (index >= 0) {
+
+			keyStates[index] = false;
+			releaseTimeStamps[index] = System.currentTimeMillis();
+		}
+	}
+
 }

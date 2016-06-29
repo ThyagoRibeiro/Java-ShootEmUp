@@ -12,12 +12,12 @@ public class ActiveTimeState implements EntityState {
 	}
 
 	@Override
-	public void Update() {
-
+	public void Render() {
+		Draw.drawTime(180, 70, context.getTime());
 	}
 
 	@Override
-	public void Render() {
-		Draw.drawTime(180, 70, context.getTime());
+	public void Update() {
+
 	}
 }

@@ -23,15 +23,6 @@ public class BackgroundStar extends Entity {
 	}
 
 	@Override
-	public void Update() {
-		UpdatePosition();
-		if (this._position.getY() >= GameLib.HEIGHT - this._radius) {
-			this._position.setXY((float) ((float) Math.random() * GameLib.WIDTH + this._radius), (float) -this._radius);
-		}
-
-	}
-
-	@Override
 	public void Render() {
 		switch (_level) {
 		case 1:
@@ -43,6 +34,15 @@ public class BackgroundStar extends Entity {
 			break;
 		}
 		Draw.fillRect(this._position.getX(), this._position.getY(), _radius, _radius);
+	}
+
+	@Override
+	public void Update() {
+		UpdatePosition();
+		if (this._position.getY() >= GameLib.HEIGHT - this._radius) {
+			this._position.setXY((float) ((float) Math.random() * GameLib.WIDTH + this._radius), (float) -this._radius);
+		}
+
 	}
 
 }

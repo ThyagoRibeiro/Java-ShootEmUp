@@ -21,8 +21,8 @@ public class Projectile extends Entity implements Collidable {
 	}
 
 	@Override
-	public void Update() {
-		this._state.Update();
+	public boolean CheckCollision(Entity other) {
+		return CollisionChecker.CheckCollision(this, other);
 	}
 
 	@Override
@@ -31,8 +31,8 @@ public class Projectile extends Entity implements Collidable {
 	}
 
 	@Override
-	public boolean CheckCollision(Entity other) {
-		return CollisionChecker.CheckCollision(this, other);
+	public void Update() {
+		this._state.Update();
 	}
 
 }

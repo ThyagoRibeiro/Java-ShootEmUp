@@ -4,6 +4,7 @@ import game.entities.Entity;
 import game.entities.Entity.EntityType;
 import game.entities.collision.CollisionState;
 import game.entities.state.ExplodingState;
+import game.screenstate.MainGameScreen;
 
 public class Enemy1CollisionState implements CollisionState {
 
@@ -18,6 +19,8 @@ public class Enemy1CollisionState implements CollisionState {
 		if (collider.getEntityType() == EntityType.FriendlyProjectile) {
 			collider.Remove();
 			_context.setState(new ExplodingState(_context, 400));
+			((MainGameScreen)_context.getScreenState()).enemyDied();
+
 		}
 	}
 }

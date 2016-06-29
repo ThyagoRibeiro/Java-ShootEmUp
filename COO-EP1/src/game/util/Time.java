@@ -21,24 +21,24 @@ public class Time {
 		_timeScale = 1.0;
 	}
 
-	public void UpdateDelta() {
-		_delta = System.currentTimeMillis() - _currentTimeMilis;
-		_currentTimeMilis = System.currentTimeMillis();
-	}
-
-	public void setTimeScale(double timeScale) {
-		this._timeScale = timeScale;
-	}
-
-	public double getTimeScale() {
-		return this._timeScale;
+	public long CurrentTime() {
+		return System.currentTimeMillis();
 	}
 
 	public long DeltaTime() {
 		return (long) (_delta * _timeScale);
 	}
 
-	public long CurrentTime() {
-		return System.currentTimeMillis();
+	public double getTimeScale() {
+		return this._timeScale;
+	}
+
+	public void setTimeScale(double timeScale) {
+		this._timeScale = timeScale;
+	}
+
+	public void UpdateDelta() {
+		_delta = System.currentTimeMillis() - _currentTimeMilis;
+		_currentTimeMilis = System.currentTimeMillis();
 	}
 }

@@ -27,12 +27,12 @@ public abstract class Enemy extends Entity implements Collidable {
 		return this._rv;
 	}
 
-	public void setRv(double rv) {
-		this._rv = rv;
-	}
-
 	public void setAngle(double angle) {
 		this._angle = angle;
+	}
+
+	public void setRv(double rv) {
+		this._rv = rv;
 	}
 
 	public void setWeapon(Weapon weapon) {

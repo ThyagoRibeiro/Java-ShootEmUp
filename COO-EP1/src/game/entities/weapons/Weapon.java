@@ -24,19 +24,7 @@ public class Weapon implements Cloneable {
 			this.cooldown -= 200;
 	}
 
-	public void Shoot() {
-		if (localTime.hasEnded()) {
-			float centeredX = (float) (owner.getPosition().getX() + owner.getRadius()/2);
-			float centeredY = (float) (owner.getPosition().getY() + owner.getRadius()/2);
-			new Projectile(new Vector2D(centeredX, centeredY), _missilespeed, owner.getScreenState(), _playerUsing);
-			localTime.Start(cooldown);
-		}
-	}
-
-	public void setPlayerUsing(boolean playerUsing) {
-		this._playerUsing = playerUsing;
-	}
-
+	@Override
 	public Object clone() {
 		Object clone = null;
 		try {
@@ -46,5 +34,18 @@ public class Weapon implements Cloneable {
 		}
 
 		return clone;
+	}
+
+	public void setPlayerUsing(boolean playerUsing) {
+		this._playerUsing = playerUsing;
+	}
+
+	public void Shoot() {
+		if (localTime.hasEnded()) {
+			float centeredX = (float) (owner.getPosition().getX() + owner.getRadius() / 2);
+			float centeredY = (float) (owner.getPosition().getY() + owner.getRadius() / 2);
+			new Projectile(new Vector2D(centeredX, centeredY), _missilespeed, owner.getScreenState(), _playerUsing);
+			localTime.Start(cooldown);
+		}
 	}
 }

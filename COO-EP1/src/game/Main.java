@@ -9,6 +9,8 @@ import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 
+import stage.Stage;
+
 public class Main {
 
 	private static int playerHealthPoints;
@@ -18,8 +20,8 @@ public class Main {
 
 		readArchives();
 
-		 GameCore gm = new GameCore();
-		 gm.start();
+		GameCore gm = new GameCore(playerHealthPoints, stages);
+		gm.start();
 	}
 
 	private static void readArchives() {
@@ -46,17 +48,15 @@ public class Main {
 
 			for (int i = 0; i < numberOfStages; i++) {
 
-				System.out.println(i);
-
 				fis = new FileInputStream(stagesArchives.get(i));
 				isr = new InputStreamReader(fis, Charset.forName("UTF-8"));
 				br = new BufferedReader(isr);
 
-				while (br.readLine()!= null) {
-					words = br.readLine().split(" ");
-					stage = new Stage(i);
+				stage = new Stage(i);
 
-					System.out.println(words[0]);
+				while ((line = br.readLine()) != null) {
+
+					words = line.split(" ");
 
 					if (words[0].equals("INIMIGO")) {
 						stage.addEnemy(Integer.parseInt(words[1]), Integer.parseInt(words[2]),
@@ -75,6 +75,7 @@ public class Main {
 
 				stages.add(stage);
 
+				br.close();
 			}
 
 		} catch (FileNotFoundException e) {

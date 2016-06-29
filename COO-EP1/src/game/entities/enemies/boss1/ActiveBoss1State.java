@@ -1,7 +1,5 @@
 package game.entities.enemies.boss1;
 
-import java.awt.Color;
-
 import game.GameLib;
 import game.entities.state.EntityState;
 import game.util.Draw;
@@ -23,35 +21,39 @@ public class ActiveBoss1State implements EntityState {
 	}
 
 	@Override
+	public void Render() {
+		Draw.setColor(context.getColor());
+		Draw.drawHourglass(context.getPosition().getX(), context.getPosition().getY(), context.getRadius());
+	}
+
+	@Override
 	public void Update() {
-		
+
 		if (context.getPosition().getY() <= 0) {
-			context.setPosition(new Vector2D(0,150));
+			context.setPosition(new Vector2D(0, 150));
 		} else {
 			float curX = context.getPosition().getX();
 			float curY = context.getPosition().getY();
 			double angle = context.getAngle();
-			
+
 			boolean flagLeftWay = false;
-			
-			if(context.getPosition().getX() <= 0){
+
+			if (context.getPosition().getX() <= 0) {
 				flagLeftWay = false;
 			} else {
-				if(context.getPosition().getX() + context.getRadius() >= GameLib.WIDTH){
+				if (context.getPosition().getX() + context.getRadius() >= GameLib.WIDTH) {
 					flagLeftWay = true;
 				}
 			}
-			
-			
-			if(flagLeftWay){
-				//System.out.println("indo p/ esq");
+
+			if (flagLeftWay) {
+				// System.out.println("indo p/ esq");
 				curX += context.getVelocity().getX() * Math.sin(angle) * Time.getInstance().DeltaTime();
 			} else {
-				//System.out.println("indo p/ dir");
+				// System.out.println("indo p/ dir");
 				curX -= context.getVelocity().getX() * Math.sin(angle) * Time.getInstance().DeltaTime();
 			}
-			
-			
+
 			angle += context.getRV() * Time.getInstance().DeltaTime();
 			context.setPosition(new Vector2D(curX, curY));
 			context.setAngle(angle);
@@ -60,11 +62,5 @@ public class ActiveBoss1State implements EntityState {
 			context.Shoot();
 			shootTime.Start(Math.random() * waitTime);
 		}
-	}
-
-	@Override
-	public void Render() {
-		Draw.setColor(new Color(139,0,139));
-		Draw.drawHourglass(context.getPosition().getX(), context.getPosition().getY(), context.getRadius());
 	}
 }

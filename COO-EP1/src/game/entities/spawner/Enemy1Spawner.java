@@ -1,25 +1,24 @@
 package game.entities.spawner;
 
-import game.GameLib;
 import game.entities.Entity;
 import game.entities.enemies.enemy1.Enemy1;
 import game.entities.weapons.WeaponsFactory;
 import game.entities.weapons.WeaponsFactory.WeaponType;
+import game.screenstate.MainGameScreen;
 import geometry.Vector2D;
 
 public class Enemy1Spawner extends EntitySpawner {
 
-	public Enemy1Spawner(SpawnManager spawnManager, double respawnCooldown, double maxWait, double initialWait) {
-		super(spawnManager, respawnCooldown, maxWait, initialWait);
+	MainGameScreen mainGameScreen;
+	
+	public Enemy1Spawner(SpawnManager _spawnManager, int when, int x, int y) {
+		super(_spawnManager, when, x, y);
 	}
 
 	@Override
-	protected Entity Spawn() {
-		Enemy1 enemy = new Enemy1(new Vector2D((float) (Math.random() * (GameLib.WIDTH - 100.0) + 50.0f), -10.0f),
-				_spawnManager.getScreenState());
+	protected Entity Spawn(int x, int y) {
+		Enemy1 enemy = new Enemy1(new Vector2D(x, y + 100), _spawnManager.getScreenState(), mainGameScreen);
 		enemy.setWeapon(WeaponsFactory.CreateWeapon(WeaponType.Basic, enemy));
 		return enemy;
-
 	}
-
 }

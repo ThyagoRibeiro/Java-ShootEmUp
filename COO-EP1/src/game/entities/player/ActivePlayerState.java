@@ -1,7 +1,5 @@
 package game.entities.player;
 
-import java.awt.Color;
-
 import game.GameLib;
 import game.entities.state.EntityState;
 import game.util.Draw;
@@ -13,6 +11,13 @@ public class ActivePlayerState implements EntityState {
 
 	public ActivePlayerState(Player context) {
 		this.context = context;
+	}
+
+	@Override
+	public void Render() {
+
+		Draw.setColor(context.getColor());
+		Draw.drawPlayer(context.getPosition().getX(), context.getPosition().getY(), context.getRadius());
 	}
 
 	@Override
@@ -48,14 +53,6 @@ public class ActivePlayerState implements EntityState {
 		if (GameLib.iskeyPressed(GameLib.KEY_CONTROL)) {
 			context.TryShoot();
 		}
-	}
-
-	@Override
-	public void Render() {
-		
-			Draw.setColor(context.getPlayerColor());
-
-		Draw.drawPlayer(context.getPosition().getX(), context.getPosition().getY(), context.getRadius());
 	}
 
 }

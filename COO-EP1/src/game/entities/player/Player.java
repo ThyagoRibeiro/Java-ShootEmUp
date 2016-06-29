@@ -13,34 +13,66 @@ import geometry.Vector2D;
 
 public class Player extends Entity implements Collidable {
 
-	protected Weapon _weapon;
 	protected LifeBar _lifeBar;
-	protected Color playerColor = Color.BLUE;
+	protected Weapon _weapon;
+	protected Color normalColor = Color.BLUE, getHitColor = Color.WHITE, currentColor;
 
-	public Player(Vector2D position, Vector2D velocity, double radius, ScreenState screenState) {
+	public Player(Vector2D position, Vector2D velocity, double radius, ScreenState screenState, int healthPoints) {
 
 		super(position, velocity, radius, screenState);
 		position.setXY((GameLib.WIDTH - (float) radius) / 2.0f, GameLib.HEIGHT * 0.9f);
 		this.setState(new ActivePlayerState(this));
+
 		_screenState.getEntityManager().setPlayer(this);
 		this._collision = new PlayerCollisionState(this);
+
+		currentColor = normalColor;
 		this._type = EntityType.Player;
-		_lifeBar = new LifeBar(10, Color.BLUE, this);
-	}
-
-	@Override
-	public void Update() {
-		this._state.Update();
-	}
-
-	@Override
-	public void Render() {
-		this._state.Render();
+		_lifeBar = new LifeBar(healthPoints, this);
 	}
 
 	@Override
 	public boolean CheckCollision(Entity other) {
 		return CollisionChecker.CheckCollision(this, other);
+	}
+
+	public Color getColor() {
+		return currentColor;
+	}
+
+	public void getHit() {
+		// TODO Auto-generated method stub
+		Thread t = new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				for (int i = 0; i < 4; i++) {
+					if (i % 2 == 0)
+						currentColor = getHitColor;
+					else
+						currentColor = normalColor;
+
+					try {
+						Thread.sleep(500);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		});
+
+		t.start();
+	}
+
+	public boolean isDead() {
+		return _lifeBar.getCurrentHealthPoints() == 0;
+	}
+
+	@Override
+	public void Render() {
+		this._state.Render();
 	}
 
 	public void setWeapon(Weapon weapon) {
@@ -53,38 +85,9 @@ public class Player extends Entity implements Collidable {
 		_weapon.Shoot();
 	}
 
-	public boolean isDead() {
-		return _lifeBar.getCurrentHealthPoints() == 0;
+	@Override
+	public void Update() {
+		this._state.Update();
 	}
 
-	public Color getPlayerColor() {
-		return playerColor;
-	}
-
-	public void getHit() {
-		// TODO Auto-generated method stub
-		Thread t = new Thread(new Runnable() {
-			
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				for (int i = 0; i < 4; i++) {
-					if(i%2==0)
-						playerColor = Color.WHITE;
-					else
-						playerColor = Color.BLUE;
-					
-					try {
-						Thread.sleep(500);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-			}
-		});
-		
-		t.start();
-	}
-	
 }

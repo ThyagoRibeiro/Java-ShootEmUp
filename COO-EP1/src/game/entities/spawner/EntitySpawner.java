@@ -6,23 +6,24 @@ import game.util.LocalTime;
 public abstract class EntitySpawner {
 
 	protected LocalTime _localTime;
-	protected double _respawnCooldown, _maxWait;
 	protected SpawnManager _spawnManager;
+	protected boolean spawned;
+	protected int x, y;
 
-	public EntitySpawner(SpawnManager spawnManager, double respawnCooldown, double maxWait, double initialWait) {
-		_localTime = new LocalTime(initialWait);
-		this._respawnCooldown = respawnCooldown;
-		this._maxWait = maxWait;
+	public EntitySpawner(SpawnManager spawnManager, int when, int x, int y) {
+		this.x = x;
+		this.y = y;
+		_localTime = new LocalTime(when);
 		this._spawnManager = spawnManager;
 		this._spawnManager.Add(this);
 	}
 
+	protected abstract Entity Spawn(int x, int y);
+
 	public void Update() {
-		if (_localTime.hasEnded()) {
-			Spawn();
-			_localTime.Start(_respawnCooldown + (Math.random() * _maxWait));
+		if (_localTime.hasEnded() && !spawned) {
+			Spawn(x, y);
+			spawned = true;
 		}
 	}
-
-	protected abstract Entity Spawn();
 }
