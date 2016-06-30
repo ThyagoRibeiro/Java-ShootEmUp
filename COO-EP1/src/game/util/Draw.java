@@ -113,7 +113,7 @@ public class Draw {
 		Draw.drawLine(player_X - player_size, player_Y + player_size, player_X, player_Y + player_size * 0.5);
 		Draw.drawLine(player_X + player_size, player_Y + player_size, player_X, player_Y + player_size * 0.5);
 	}
-
+	
 	public static void drawSquare(double x, double y, double radius) {
 
 		int x1 = (int) Math.round(x);

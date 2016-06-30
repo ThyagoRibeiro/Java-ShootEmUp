@@ -13,7 +13,7 @@ import geometry.Vector2D;
 public class Boss2 extends Enemy {
 
 	protected LifeBar _lifeBar;
-	protected Color normalColor = Color.GREEN, getHitColor = Color.WHITE, currentColor;
+	protected Color normalColor = Color.RED, getHitColor = Color.WHITE, currentColor;
 
 	public Boss2(Vector2D position, ScreenState screenState, int healthPoints, MainGameScreen mainGameScreen) {
 		super(position, new Vector2D((float) (0.05 + Math.random() * 0.10), (float) (0.05 + Math.random() * 0.10)),

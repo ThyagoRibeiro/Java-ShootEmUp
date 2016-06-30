@@ -16,7 +16,7 @@ public class ActiveBoss2State implements EntityState {
 	private double waitTime;
 
 	public ActiveBoss2State(Boss2 context) {
-		waitTime = 1000;
+		waitTime = 750;
 		this.context = context;
 		shootTime = new LocalTime(Math.random() * waitTime);
 		counterGoes = 0;
@@ -25,7 +25,8 @@ public class ActiveBoss2State implements EntityState {
 	@Override
 	public void Render() {
 		Draw.setColor(context.getColor());
-		Draw.drawHourglass(context.getPosition().getX(), context.getPosition().getY(), context.getRadius());
+		Draw.drawDiamond(context.getPosition().getX(), context.getPosition().getY(), context.getRadius());
+		Draw.drawCircle(context.getPosition().getX(), context.getPosition().getY(), context.getRadius());
 	}
 
 	@Override

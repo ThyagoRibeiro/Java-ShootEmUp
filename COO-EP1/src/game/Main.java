@@ -67,9 +67,9 @@ public class Main {
 								Integer.parseInt(words[3]), Integer.parseInt(words[4]));
 
 					} else if (words[0].equals("CHEFE")) {
-						stage.addBoss(Integer.parseInt(words[1]), Integer.parseInt(words[2]),
-								Integer.parseInt(words[3]), Integer.parseInt(words[4]), Integer.parseInt(words[5]));
-					}
+			            stage.addBoss(Integer.parseInt(words[1]), Integer.parseInt(words[5]), Integer.parseInt(words[2]),
+			                Integer.parseInt(words[3]), Integer.parseInt(words[4]));
+			          }
 
 				}
 
