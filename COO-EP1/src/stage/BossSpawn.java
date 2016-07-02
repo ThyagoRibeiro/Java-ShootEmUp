@@ -8,7 +8,7 @@ public class BossSpawn {
 	private int x;
 	private int y;
 
-	public BossSpawn(int type, int when, int x, int y, int healthPoints) {
+	public BossSpawn(int type, int healthPoints, int when, int x, int y) {
 
 		this.type = type;
 		this.when = when;

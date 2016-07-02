@@ -24,8 +24,10 @@ public class ActiveBoss2State implements EntityState {
 
 	@Override
 	public void Render() {
+
 		Draw.setColor(context.getColor());
-		Draw.drawHourglass(context.getPosition().getX(), context.getPosition().getY(), context.getRadius());
+		Draw.drawDiamond(context.getPosition().getX(), context.getPosition().getY(), context.getRadius());
+		Draw.drawCircle(context.getPosition().getX(), context.getPosition().getY(), context.getRadius());
 	}
 
 	@Override
@@ -38,11 +40,11 @@ public class ActiveBoss2State implements EntityState {
 			double angle = context.getAngle();
 
 			if (context.getPosition().getX() <= 0) {
-//				System.out.println("\tAtualizou o sentido: " + counterGoes);
+				// System.out.println("\tAtualizou o sentido: " + counterGoes);
 				counterGoes++;
 			}
 			if ((context.getPosition().getX() + context.getRadius()) >= GameLib.WIDTH) {
-//				System.out.println("\tAtualizou o sentido: " + counterGoes);
+				// System.out.println("\tAtualizou o sentido: " + counterGoes);
 				counterGoes++;
 			}
 

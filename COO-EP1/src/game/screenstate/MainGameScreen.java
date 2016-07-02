@@ -3,7 +3,6 @@ package game.screenstate;
 import java.util.ArrayList;
 
 import game.entities.backgroundstar.BackgroundStar;
-import game.entities.hud.Infos;
 import game.entities.player.Player;
 import game.entities.spawner.Boss1Spawner;
 import game.entities.spawner.Boss2Spawner;
@@ -12,7 +11,6 @@ import game.entities.spawner.Enemy2Spawner;
 import game.entities.spawner.SpawnManager;
 import game.entities.weapons.WeaponsFactory;
 import game.util.LocalTime;
-import game.util.Time;
 import geometry.Vector2D;
 import stage.BossSpawn;
 import stage.EnemySpawn;
