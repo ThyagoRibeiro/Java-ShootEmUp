@@ -8,6 +8,8 @@ import game.entities.spawner.Boss1Spawner;
 import game.entities.spawner.Boss2Spawner;
 import game.entities.spawner.Enemy1Spawner;
 import game.entities.spawner.Enemy2Spawner;
+import game.entities.spawner.PowerUp1Spawner;
+import game.entities.spawner.PowerUp2Spawner;
 import game.entities.spawner.SpawnManager;
 import game.entities.weapons.WeaponsFactory;
 import game.util.LocalTime;
@@ -23,7 +25,7 @@ public class MainGameScreen extends ScreenState {
 	private SpawnManager _spawnManager;
 	private boolean bossIsDead;
 	private LocalTime ltime = null;
-	private int playerHealthPoints, numberOfEnemies, stageNumber;
+	private int playerHealthPoints, stageNumber, numberOfEnemies, deadEnemies = 0;
 	private ArrayList<Stage> stages;
 
 	public MainGameScreen(int playerHealthPoints, ArrayList<Stage> stages, int stageNumber) {
@@ -39,8 +41,7 @@ public class MainGameScreen extends ScreenState {
 	}
 
 	public void enemyDied() {
-		numberOfEnemies--;
-		System.out.println(numberOfEnemies);
+		deadEnemies++;
 	}
 
 	public SpawnManager getSpawnManager() {
@@ -53,9 +54,10 @@ public class MainGameScreen extends ScreenState {
 	public void OnEnter(ScreenContext context) {
 
 		_spawnManager = new SpawnManager(this);
-		_player = new Player(new Vector2D(25.0f, 600.0f), new Vector2D(0.3f, 0.2f), 9.0f, this, playerHealthPoints, stageNumber + 1);
-		_player.setWeapon(WeaponsFactory.CreateWeapon(WeaponsFactory.WeaponType.Basic2, _player));
-		
+		_player = new Player(new Vector2D(25.0f, 600.0f), new Vector2D(0.3f, 0.2f), 9.0f, this, playerHealthPoints,
+				stageNumber + 1);
+		_player.setWeapon(WeaponsFactory.CreateWeapon(WeaponsFactory.WeaponType.PlayerDeafultShot, _player));
+
 		for (EnemySpawn enemy : stages.get(stageNumber).getEnemiesSpawn()) {
 
 			if (enemy.getType() == 1)
@@ -80,12 +82,10 @@ public class MainGameScreen extends ScreenState {
 
 		for (PowerUpSpawn powerup : stages.get(stageNumber).getPowerUpsSpawn()) {
 
-			// if (powerup.getType() == 1)
-			// new PowerUp1Spawner(_spawnManager, powerup.getWhen(),
-			// powerup.getX(), powerup.getY());
-			// else
-			// new PowerUp2Spawner(_spawnManager, powerup.getWhen(),
-			// powerup.getX(), powerup.getY());
+			if (powerup.getType() == 1)
+				new PowerUp1Spawner(_spawnManager, powerup.getWhen(), powerup.getX(), powerup.getY());
+			else
+				new PowerUp2Spawner(_spawnManager, powerup.getWhen(), powerup.getX(), powerup.getY());
 
 		}
 

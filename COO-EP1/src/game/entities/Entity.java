@@ -9,7 +9,7 @@ import geometry.Vector2D;
 public abstract class Entity {
 
 	public enum EntityType {
-		Enemy, EnemyProjectile, FriendlyProjectile, HUD, None, Player
+		Enemy, EnemyProjectile, FriendlyProjectile, HUD, None, Player, PowerUp
 	}
 
 	protected CollisionState _collision;

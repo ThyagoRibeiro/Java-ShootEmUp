@@ -3,7 +3,9 @@ package game.entities.enemies.enemy1;
 import game.entities.Entity;
 import game.entities.Entity.EntityType;
 import game.entities.collision.CollisionState;
+import game.entities.projectiles.Projectile;
 import game.entities.state.ExplodingState;
+import game.entities.weapons.WeaponsFactory.WeaponType;
 import game.screenstate.MainGameScreen;
 
 public class Enemy1CollisionState implements CollisionState {
@@ -17,7 +19,10 @@ public class Enemy1CollisionState implements CollisionState {
 	@Override
 	public void OnCollision(Entity collider) {
 		if (collider.getEntityType() == EntityType.FriendlyProjectile) {
-			collider.Remove();
+
+			if (((Projectile) collider).getType().equals(WeaponType.PlayerDeafultShot))
+				collider.Remove();
+			
 			_context.setState(new ExplodingState(_context, 400));
 			((MainGameScreen) _context.getScreenState()).enemyDied();
 

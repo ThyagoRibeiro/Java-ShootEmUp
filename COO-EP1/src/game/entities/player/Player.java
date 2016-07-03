@@ -10,14 +10,14 @@ import game.entities.hud.Infos;
 import game.entities.hud.LifeBar;
 import game.entities.weapons.Weapon;
 import game.screenstate.ScreenState;
-import game.util.Time;
 import geometry.Vector2D;
 
 public class Player extends Entity implements Collidable {
 
 	protected LifeBar _lifeBar;
-	protected Infos infos;
 	protected Weapon _weapon;
+	protected boolean hasShield;
+	protected Infos infos;
 	protected Color normalColor = Color.BLUE, getHitColor = Color.WHITE, currentColor;
 
 	public Player(Vector2D position, Vector2D velocity, double radius, ScreenState screenState, int healthPoints, int stageNumber) {
@@ -34,6 +34,10 @@ public class Player extends Entity implements Collidable {
 		_lifeBar = new LifeBar(healthPoints, this);
 		infos = new Infos(this, stageNumber);
 
+	}
+
+	public void addShield() {
+		this.hasShield = true;
 	}
 
 	@Override
@@ -80,7 +84,7 @@ public class Player extends Entity implements Collidable {
 		this._state.Render();
 	}
 
-	public void setWeapon(Weapon weapon) {
+	public void setWeapon(Weapon weapon) {		
 		this._weapon = weapon;
 	}
 

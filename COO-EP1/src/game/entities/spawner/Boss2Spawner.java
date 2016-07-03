@@ -20,7 +20,7 @@ public class Boss2Spawner extends EntitySpawner {
 	@Override
 	protected Entity Spawn(int x, int y) {
 		Boss2 boss2 = new Boss2(new Vector2D(x, y), _spawnManager.getScreenState(), healthPoints, mainGameScreen);
-		boss2.setWeapon(WeaponsFactory.CreateWeapon(WeaponType.Basic, boss2));
+		boss2.setWeapon(WeaponsFactory.CreateWeapon(WeaponType.EnemyShot, boss2));
 		return boss2;
 	}
 

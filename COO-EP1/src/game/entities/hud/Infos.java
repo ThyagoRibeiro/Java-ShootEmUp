@@ -16,12 +16,12 @@ public class Infos extends Entity {
 		this._type = EntityType.HUD;
 	}
 
-	public int getTime() {
-		return ((int) (Time.getInstance().CurrentTime() - localTime.getStart()))/ 1000;
-	}
-	
 	public int getStageNumber() {
 		return stageNumber;
+	}
+	
+	public int getTime() {
+		return ((int) (Time.getInstance().CurrentTime() - localTime.getStart()))/ 1000;
 	}
 
 	@Override

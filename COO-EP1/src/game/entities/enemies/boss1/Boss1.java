@@ -61,7 +61,7 @@ public class Boss1 extends Enemy {
 	}
 
 	public boolean isDead() {
-		return _lifeBar.getCurrentHealthPoints() == 0;
+		return _lifeBar.getCurrentHealthPoints() <= 0;
 	}
 
 	@Override

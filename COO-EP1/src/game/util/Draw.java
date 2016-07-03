@@ -16,10 +16,10 @@ public class Draw {
 		int y = (int) Math.round(cy - radius);
 		int width = (int) Math.round(2 * radius);
 		int height = (int) Math.round(2 * radius);
-
+		
 		_g.drawOval(x, y, width, height);
 	}
-
+	
 	public static void drawDiamond(double x, double y, double radius) {
 
 		int x1 = (int) Math.round(x);
@@ -80,25 +80,7 @@ public class Draw {
 		_g.fillRect(x + 5, y + 5, (int) ((width - 10) * lifePointsPercent), height - 10);
 
 	}
-
-	public static void drawTwoStrings(String text1, String text2, int x, int y) {
-		
-		_g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
-	    int x2 = (x + _g.getFontMetrics().stringWidth(text1)/2) - 2;
-		
-		setColor(Color.WHITE);
-		_g.drawString(text1, x, y - 10);
-		_g.drawString(text2, x2, y + 15);
-	}
-
-	public static void drawPowerUp(String text, float x, float y, Font f) {
-		_g.drawString(text, (int) x, (int) y);
-	}
-
-	public static void drawPowerUpActive(String text, float x, float y, Font f) {
-		_g.drawString(text, (int) x, (int) y);
-	}
-
+	
 	public static void drawLine(double x1, double y1, double x2, double y2) {
 
 		_g.drawLine((int) Math.round(x1), (int) Math.round(y1), (int) Math.round(x2), (int) Math.round(y2));
@@ -112,6 +94,14 @@ public class Draw {
 		Draw.drawLine(player_X + player_size, player_Y + player_size, player_X, player_Y - player_size);
 		Draw.drawLine(player_X - player_size, player_Y + player_size, player_X, player_Y + player_size * 0.5);
 		Draw.drawLine(player_X + player_size, player_Y + player_size, player_X, player_Y + player_size * 0.5);
+	}
+
+	public static void drawPowerUp(String text, float x, float y, Font f) {
+		_g.drawString(text, (int) x, (int) y);
+	}
+
+	public static void drawPowerUpActive(String text, float x, float y, Font f) {
+		_g.drawString(text, (int) x, (int) y);
 	}
 
 	public static void drawSquare(double x, double y, double radius) {
@@ -134,7 +124,7 @@ public class Draw {
 		drawLine(x4, y4, x1, y1);
 	}
 
-	public static void drawText(String text, float x, float y, Font f) {
+	public static void drawText(String text, float x, float y) {
 		_g.drawString(text, (int) x, (int) y);
 	}
 
@@ -143,6 +133,26 @@ public class Draw {
 		_g.setFont(new Font("Arial", Font.PLAIN, 30));
 		_g.drawString("Tempo", x, y - 10);
 		_g.drawString(Integer.toString(secs), x, y + 20);
+	}
+
+	public static void drawTwoStrings(String text1, String text2, int x, int y) {
+		
+		_g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
+	    int x2 = (x + _g.getFontMetrics().stringWidth(text1)/2) - 2;
+		
+		setColor(Color.WHITE);
+		_g.drawString(text1, x, y - 10);
+		_g.drawString(text2, x2, y + 15);
+	}
+
+	public static void fillCircle(double cx, double cy, double radius) {
+
+		int x = (int) Math.round(cx - radius);
+		int y = (int) Math.round(cy - radius);
+		int width = (int) Math.round(2 * radius);
+		int height = (int) Math.round(2 * radius);
+		
+		_g.fillOval(x, y, width, height);
 	}
 
 	public static void fillRect(double cx, double cy, double width, double height) {
@@ -172,6 +182,22 @@ public class Draw {
 	public static void setGraphics(Graphics2D g) {
 		_g = g;
 	}
+
+	public static void writeInCircle(float x, float y, String text, double radius) {
+		// Find the size of string s in font f in the current Graphics context g.
+	
+		FontMetrics fm = _g.getFontMetrics();
+		java.awt.geom.Rectangle2D rect = fm.getStringBounds(text, _g);
+
+		int textHeight = (int) (rect.getHeight());
+		int textWidth = (int) (rect.getWidth());
+
+		// Find the top left and right corner
+		int cornerX = (int) (x - (textWidth / 2));
+		int cornerY = (int) (y - (textHeight / 2) + fm.getAscent());
+
+		_g.drawString(text, cornerX, cornerY);  // Draw the string.
+		}
 
 	protected Draw() {
 

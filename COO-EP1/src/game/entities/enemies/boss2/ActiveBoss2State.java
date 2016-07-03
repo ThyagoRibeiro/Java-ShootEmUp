@@ -27,7 +27,7 @@ public class ActiveBoss2State implements EntityState {
 
 		Draw.setColor(context.getColor());
 		Draw.drawDiamond(context.getPosition().getX(), context.getPosition().getY(), context.getRadius());
-		Draw.drawCircle(context.getPosition().getX(), context.getPosition().getY(), context.getRadius());
+		Draw.fillCircle(context.getPosition().getX(), context.getPosition().getY(), context.getRadius());
 	}
 
 	@Override
