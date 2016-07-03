@@ -14,8 +14,7 @@ public class PowerUp1Spawner extends EntitySpawner {
 	}
 
 	@Override
-	protected Entity Spawn(int x, int y) {
+	protected void Spawn(int x, int y) {
 		PowerUp1 powerUp = new PowerUp1(new Vector2D(x, y), _spawnManager.getScreenState(), mainGameScreen);
-		return powerUp;
 	}
 }

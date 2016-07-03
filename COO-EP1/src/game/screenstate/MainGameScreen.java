@@ -59,12 +59,13 @@ public class MainGameScreen extends ScreenState {
 
 		for (EnemySpawn enemy : stages.get(stageNumber).getEnemiesSpawn()) {
 
-			if (enemy.getType() == 1)
+			if (enemy.getType() == 1) {
 				new Enemy1Spawner(_spawnManager, enemy.getWhen(), enemy.getX(), enemy.getY());
-			else
+				numberOfEnemies++;
+			} else {
 				new Enemy2Spawner(_spawnManager, enemy.getWhen(), enemy.getX(), enemy.getY());
-
-			numberOfEnemies++;
+				numberOfEnemies += 10;
+			}
 		}
 
 		if (stages.get(stageNumber).getBossSpawn() != null) {
@@ -149,7 +150,5 @@ public class MainGameScreen extends ScreenState {
 	public int getDeadEnemies() {
 		return deadEnemies;
 	}
-
-	
 
 }

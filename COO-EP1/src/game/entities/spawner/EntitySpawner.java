@@ -18,7 +18,7 @@ public abstract class EntitySpawner {
 		this._spawnManager.Add(this);
 	}
 
-	protected abstract Entity Spawn(int x, int y);
+	protected abstract void Spawn(int x, int y);
 
 	public void Update() {
 		if (_localTime.hasEnded() && !spawned) {

@@ -18,21 +18,24 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		readArchives();
+		if (args.length == 1)
+			readArchives(args[0]);
+		else
+			readArchives("game.txt");
 
 		GameCore gm = new GameCore(playerHealthPoints, stages);
 		gm.start();
 	}
 
-	private static void readArchives() {
-		// TODO Auto-generated method stub
+	private static void readArchives(String fileName) {
+
 		int numberOfStages = 0;
 		ArrayList<String> stagesArchives = new ArrayList<>();
 
 		String line;
 
 		try {
-			InputStream fis = new FileInputStream("game.txt");
+			InputStream fis = new FileInputStream(fileName);
 			InputStreamReader isr = new InputStreamReader(fis, Charset.forName("UTF-8"));
 			BufferedReader br = new BufferedReader(isr);
 

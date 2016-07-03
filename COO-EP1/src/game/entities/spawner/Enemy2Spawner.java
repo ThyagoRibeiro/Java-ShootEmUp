@@ -16,10 +16,24 @@ public class Enemy2Spawner extends EntitySpawner {
 	}
 
 	@Override
-	protected Entity Spawn(int x, int y) {
-		Enemy2 enemy = new Enemy2(new Vector2D(x, y), _spawnManager.getScreenState(), mainGameScreen);
-		enemy.setWeapon(WeaponsFactory.CreateWeapon(WeaponType.EnemyShot, enemy));
-		return enemy;
+	protected void Spawn(int x, int y) {
+		
+		Vector2D velocity = new Vector2D((float) (0.15 + Math.random() * 0.10), (float) (0.15 + Math.random() * 0.10));
+		
+		new Thread(new Runnable() {
+			public void run() {
+				for (int i = 0; i < 10; i++) {
+					Enemy2 enemy = new Enemy2(new Vector2D(x, y), velocity, _spawnManager.getScreenState(), mainGameScreen);
+					enemy.setWeapon(WeaponsFactory.CreateWeapon(WeaponType.EnemyShot, enemy));
+					try {
+						Thread.sleep(120);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}).start();
+
 	}
 
 }
