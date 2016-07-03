@@ -13,10 +13,8 @@ public class ActiveInfosState implements EntityState {
 
 	@Override
 	public void Render() {
-//		System.out.println("time: " + context.getTime() + 1);	
-
-//		Draw.drawTwoStrings("Time", Integer.toString(context.getTime()), 170, 70);
-		Draw.drawTwoStrings("Stage", Integer.toString(context.getStageNumber()), 180, 80);
+		Draw.drawString("Fase: " + Integer.toString(context.getPlayer().getMainGameScreen().getStageNumber() + 1), 180, 70);
+		Draw.drawString("Inimigos: " + context.getPlayer().getMainGameScreen().getDeadEnemies() + "/" + context.getPlayer().getMainGameScreen().getNumberOfEnemies(), 180, 100);
 	}
 
 	@Override

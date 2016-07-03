@@ -49,7 +49,7 @@ public class Weapon implements Cloneable {
 		if (localTime.hasEnded()) {
 			float centeredX = (float) (owner.getPosition().getX() + owner.getRadius() / 2);
 			float centeredY = (float) (owner.getPosition().getY() + owner.getRadius() / 2);
-			new Projectile(new Vector2D(centeredX, centeredY), _missilespeed, owner.getScreenState(), _playerUsing, type, radius);
+			new Projectile(new Vector2D(centeredX, centeredY), _missilespeed, owner.getScreenState(), _playerUsing, type, radius, null);
 			localTime.Start(cooldown);
 		}
 	}

@@ -18,7 +18,6 @@ public class PowerUp1CollisionState implements CollisionState {
 		case Player:
 			_context.Remove();
 			((Player) collider).addShield();
-			System.out.println("pegou powerup");
 			break;
 		default:
 			break;

@@ -18,11 +18,12 @@ public class Enemy1CollisionState implements CollisionState {
 
 	@Override
 	public void OnCollision(Entity collider) {
+
 		if (collider.getEntityType() == EntityType.FriendlyProjectile) {
 
 			if (((Projectile) collider).getType().equals(WeaponType.PlayerDeafultShot))
 				collider.Remove();
-			
+
 			_context.setState(new ExplodingState(_context, 400));
 			((MainGameScreen) _context.getScreenState()).enemyDied();
 

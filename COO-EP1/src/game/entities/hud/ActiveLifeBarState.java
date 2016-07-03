@@ -21,7 +21,7 @@ public class ActiveLifeBarState implements EntityState {
 			Draw.drawLifeBar(10, 70, 150, 30, context.getLifePointsPercent(), "Player");
 		} else {
 			Draw.setColor(Color.RED);
-			Draw.drawLifeBar(320, 70, 150, 30, context.getLifePointsPercent(), "Boss");
+			Draw.drawLifeBar(320, 70, 150, 30, context.getLifePointsPercent(), "Chefe");
 		}
 	}
 

@@ -14,7 +14,7 @@ public class PlayerCollisionState implements CollisionState {
 
 	@Override
 	public void OnCollision(Entity collider) {
-
+		
 		switch (collider.getEntityType()) {
 
 		case Enemy:

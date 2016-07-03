@@ -6,7 +6,7 @@ import geometry.Vector2D;
 public abstract class WeaponsFactory {
 
 	public enum WeaponType {
-		EnemyShot, PlayerDeafultShot, PlayerMegaShot
+		EnemyShot, PlayerDeafultShot, PlayerMegaShot, PlayerShield
 	};
 
 	public static Weapon CreateWeapon(WeaponType type, Entity owner) {

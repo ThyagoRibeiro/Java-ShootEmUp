@@ -11,10 +11,11 @@ public abstract class PowerUp extends Entity implements Collidable {
 
 	public PowerUp(Vector2D position, Vector2D velocity, double radius, ScreenState screenState, double angle,
 			double rv) {
-		super(position, velocity, radius, screenState);
+		super(null, velocity, radius, screenState);
 		this._angle = angle;
 		this._rv = rv;
 		this._type = EntityType.PowerUp;
+		setPosition(position);
 	}
 
 	public double getAngle() {
