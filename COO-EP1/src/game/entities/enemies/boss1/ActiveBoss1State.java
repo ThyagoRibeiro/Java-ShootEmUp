@@ -45,11 +45,17 @@ public class ActiveBoss1State implements EntityState {
 			}
 
 			if (counterGoes % 2 == 1) {
+				//curX += context.getVelocity().getX() * Math.sin(angle)
+				//		* Time.getInstance().deltaTime();
 				curX += context.getVelocity().getX() * Math.sin(angle)
 						* Time.getInstance().deltaTime();
+				curY = 150 + (float)(100*Math.sin((curX % 6*Math.PI)));
 			} else {
+				//curX -= context.getVelocity().getX() * Math.sin(angle)
+				//		* Time.getInstance().deltaTime();
 				curX -= context.getVelocity().getX() * Math.sin(angle)
 						* Time.getInstance().deltaTime();
+				curY =  150 + (float)(100*Math.sin((curX % 6*Math.PI)));
 			}
 
 			angle += context.getRV() * Time.getInstance().deltaTime();
