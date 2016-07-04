@@ -6,39 +6,39 @@ import game.screenstate.ScreenState;
 
 public class SpawnManager {
 
-	private ScreenState _screenState;
-	private ArrayList<EntitySpawner> _spawner;
+	private ScreenState screenState;
+	private ArrayList<EntitySpawner> spawner;
 
-	private ArrayList<EntitySpawner> _toadd;
+	private ArrayList<EntitySpawner> toAdd;
 
 	public SpawnManager(ScreenState screenState) {
-		_spawner = new ArrayList<EntitySpawner>();
-		_toadd = new ArrayList<EntitySpawner>();
-		this._screenState = screenState;
+		spawner = new ArrayList<EntitySpawner>();
+		toAdd = new ArrayList<EntitySpawner>();
+		this.screenState = screenState;
 	}
 
-	public void Add(EntitySpawner spawner) {
-		_toadd.add(spawner);
+	public void add(EntitySpawner spawner) {
+		toAdd.add(spawner);
 	}
 
-	public void ClearAll() {
-		_spawner.clear();
-		_toadd.clear();
+	public void clearAll() {
+		spawner.clear();
+		toAdd.clear();
 	}
 
 	public ScreenState getScreenState() {
-		return this._screenState;
+		return this.screenState;
 	}
 
-	public void Update() {
-		while (_toadd.size() > 0) {
-			EntitySpawner es = _toadd.get(_toadd.size() - 1);
-			if (_spawner.add(es)) {
-				_toadd.remove(_toadd.size() - 1);
+	public void update() {
+		while (toAdd.size() > 0) {
+			EntitySpawner es = toAdd.get(toAdd.size() - 1);
+			if (spawner.add(es)) {
+				toAdd.remove(toAdd.size() - 1);
 			}
 		}
-		for (EntitySpawner es : _spawner) {
-			es.Update();
+		for (EntitySpawner es : spawner) {
+			es.update();
 		}
 	}
 }

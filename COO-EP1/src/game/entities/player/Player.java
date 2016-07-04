@@ -17,11 +17,13 @@ import geometry.Vector2D;
 
 public class Player extends Entity implements Collidable {
 
-	protected LifeBar _lifeBar;
-	protected Weapon _weapon;
+	protected LifeBar lifeBar;
+	protected Weapon weapon;
 	protected boolean hasShield;
 	protected Infos infos;
-	protected Color normalColor = Color.BLUE, getHitColor = Color.WHITE, currentColor;
+	protected Color normalColor = Color.BLUE;
+	protected Color getHitColor = Color.WHITE;
+	protected Color currentColor;
 	protected Projectile shield;
 	private MainGameScreen mainGameScreen;
 
@@ -29,32 +31,33 @@ public class Player extends Entity implements Collidable {
 		return mainGameScreen;
 	}
 
-	public Player(Vector2D position, Vector2D velocity, double radius, ScreenState screenState, MainGameScreen mainGameScreen) {
+	public Player(Vector2D position, Vector2D velocity, double radius,
+			ScreenState screenState, MainGameScreen mainGameScreen) {
 
 		super(position, velocity, radius, screenState);
-		this.mainGameScreen = mainGameScreen; 
-		position.setXY((GameLib.WIDTH - (float) radius) / 2.0f, GameLib.HEIGHT * 0.9f);
+		this.mainGameScreen = mainGameScreen;
+		position.setXY((GameLib.WIDTH - (float) radius) / 2.0f,
+				GameLib.HEIGHT * 0.9f);
 		this.setState(new ActivePlayerState(this));
 
-		_screenState.getEntityManager().setPlayer(this);
-		this._collision = new PlayerCollisionState(this);
+		screenState.getEntityManager().setPlayer(this);
+		this.collision = new PlayerCollisionState(this);
 
 		currentColor = normalColor;
-		this._type = EntityType.Player;
-		_lifeBar = new LifeBar(mainGameScreen.getPlayerHealthPoints(), this);
+		this.entityType = EntityType.PLAYER;
+		lifeBar = new LifeBar(mainGameScreen.getPlayerHealthPoints(), this);
 		infos = new Infos(this);
 
 	}
 
 	public void addShield() {
-
-		shield = new Projectile(null, new Vector2D(0, 0), getScreenState(), true, WeaponType.PlayerShield,
-				(int) getRadius(), this);
+		shield = new Projectile(null, new Vector2D(0, 0), getScreenState(),
+				true, WeaponType.PLAYER_SHIELD, (int) getRadius(), this);
 	}
 
 	@Override
-	public boolean CheckCollision(Entity other) {
-		return CollisionChecker.CheckCollision(this, other);
+	public boolean checkCollision(Entity other) {
+		return CollisionChecker.checkCollision(this, other);
 	}
 
 	public Color getColor() {
@@ -62,53 +65,48 @@ public class Player extends Entity implements Collidable {
 	}
 
 	public void getHit() {
-		// TODO Auto-generated method stub
 		Thread t = new Thread(new Runnable() {
 
 			@Override
 			public void run() {
-				// TODO Auto-generated method stub
 				for (int i = 0; i < 4; i++) {
 					if (i % 2 == 0)
 						currentColor = getHitColor;
 					else
 						currentColor = normalColor;
-
 					try {
 						Thread.sleep(500);
 					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
 			}
 		});
-
 		t.start();
 	}
 
 	public boolean isDead() {
-		return _lifeBar.getCurrentHealthPoints() == 0;
+		return lifeBar.getCurrentHealthPoints() == 0;
 	}
 
 	@Override
-	public void Render() {
-		this._state.Render();
+	public void render() {
+		this.state.render();
 	}
 
 	public void setWeapon(Weapon weapon) {
-		this._weapon = weapon;
+		this.weapon = weapon;
 	}
 
-	public void TryShoot() {
-		if (_weapon == null)
+	public void tryShoot() {
+		if (weapon == null)
 			return;
-		_weapon.Shoot();
+		weapon.shoot();
 	}
 
 	@Override
-	public void Update() {
-		this._state.Update();
+	public void update() {
+		this.state.update();
 	}
 
 }

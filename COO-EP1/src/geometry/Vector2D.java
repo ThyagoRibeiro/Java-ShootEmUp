@@ -1,26 +1,28 @@
 package geometry;
 
 public class Vector2D {
-	protected float _coordX, _coordY;
+	protected float coordX;
+	protected float coordY;
 
 	public Vector2D() {
-		_coordX = _coordY = 0.0f;
+		coordX = coordY = 0.0f;
 	}
 
 	public Vector2D(float x, float y) {
-		this._coordX = x;
-		this._coordY = y;
+		this.coordX = x;
+		this.coordY = y;
 	}
 
-	public Vector2D Add(float addx, float addy) {
-		return new Vector2D(this._coordX + addx, this._coordY + addy);
+	public Vector2D add(float addx, float addy) {
+		return new Vector2D(this.coordX + addx, this.coordY + addy);
 	}
 
-	public Vector2D Add(Vector2D toadd) {
-		return new Vector2D(this._coordX + toadd._coordX, this._coordY + toadd._coordY);
+	public Vector2D add(Vector2D toadd) {
+		return new Vector2D(this.coordX + toadd.coordX, this.coordY
+				+ toadd.coordY);
 	}
 
-	public double Distance(Vector2D other) {
+	public double distance(Vector2D other) {
 		double dx = other.getX() - this.getX();
 		double dy = other.getY() - this.getY();
 		double dist = Math.sqrt(dx * dx + dy * dy);
@@ -29,47 +31,47 @@ public class Vector2D {
 	}
 
 	public float getX() {
-		return _coordX;
+		return coordX;
 	}
 
 	public float getY() {
-		return _coordY;
+		return coordY;
 	}
 
-	public Vector2D Multiply(float factor) {
-		return new Vector2D(this._coordX * factor, this._coordY * factor);
+	public Vector2D multiply(float factor) {
+		return new Vector2D(this.coordX * factor, this.coordY * factor);
 	}
 
-	public Vector2D Multiply(float factorx, float factory) {
-		return new Vector2D(this._coordX * factorx, this._coordY * factory);
+	public Vector2D multiply(float factorx, float factory) {
+		return new Vector2D(this.coordX * factorx, this.coordY * factory);
 	}
 
 	public void setX(float _coordX) {
-		this._coordX = _coordX;
+		this.coordX = _coordX;
 	}
 
 	public void setXY(float x, float y) {
-		this._coordX = x;
-		this._coordY = y;
+		this.coordX = x;
+		this.coordY = y;
 	}
 
 	public void setY(float _coordY) {
-		this._coordY = _coordY;
+		this.coordY = _coordY;
 	}
 
 	public void setYToNegative() {
-		if (this._coordY > 0)
-			this._coordY = -this._coordY;
+		if (this.coordY > 0)
+			this.coordY = -this.coordY;
 	}
 
 	public void setYToPositive() {
-		if (this._coordY < 0)
-			this._coordY = -this._coordY;
+		if (this.coordY < 0)
+			this.coordY = -this.coordY;
 	}
 
 	@Override
 	public String toString() {
-		return "(" + this._coordX + ", " + this._coordY + ")";
+		return "(" + this.coordX + ", " + this.coordY + ")";
 	}
 
 }

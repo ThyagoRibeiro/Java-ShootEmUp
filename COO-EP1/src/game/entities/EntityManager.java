@@ -1,115 +1,115 @@
 package game.entities;
 
-import java.awt.Color;
-import java.util.ArrayList;
-
+import game.GameLib;
 import game.entities.Entity.EntityType;
 import game.entities.collision.Collidable;
 import game.entities.player.Player;
-import game.util.Draw;
+
+import java.awt.Color;
+import java.util.ArrayList;
 
 public class EntityManager {
 
-	private ArrayList<Entity> _collideableEntities = new ArrayList<Entity>();
+	private ArrayList<Entity> collideableEntities = new ArrayList<Entity>();
 
-	private ArrayList<Entity> _hudEntities = new ArrayList<Entity>();
-	private ArrayList<Entity> _normalEntities = new ArrayList<Entity>();
-	private Player _player;
+	private ArrayList<Entity> hudEntities = new ArrayList<Entity>();
+	private ArrayList<Entity> normalEntities = new ArrayList<Entity>();
+	private Player player;
 
-	private ArrayList<Entity> _toadd = new ArrayList<Entity>();
-	private ArrayList<Entity> _toremove = new ArrayList<Entity>();
+	private ArrayList<Entity> toAdd = new ArrayList<Entity>();
+	private ArrayList<Entity> toRemove = new ArrayList<Entity>();
 
 	public EntityManager() {
-		_player = null;
-		_collideableEntities = new ArrayList<Entity>();
-		_normalEntities = new ArrayList<Entity>();
-		_hudEntities = new ArrayList<Entity>();
-
-		_toremove = new ArrayList<Entity>();
-		_toadd = new ArrayList<Entity>();
+		player = null;
+		collideableEntities = new ArrayList<Entity>();
+		normalEntities = new ArrayList<Entity>();
+		hudEntities = new ArrayList<Entity>();
+		toRemove = new ArrayList<Entity>();
+		toAdd = new ArrayList<Entity>();
 	}
 
 	public void addEntity(Entity entity) {
-		_toadd.add(entity);
+		toAdd.add(entity);
 	}
 
-	public void CheckForCollisions() {
-		for (Entity ent1 : _collideableEntities) {
-			Collidable col1 = (Collidable) ent1;
-			for (Entity ent2 : _collideableEntities) {
-				if (col1.CheckCollision(ent2)) {
-					if (ent1._collision != null)
-						ent1._collision.OnCollision(ent2);
+	public void checkForCollisions() {
+		for (Entity entity1 : collideableEntities) {
+			Collidable collidable = (Collidable) entity1;
+			for (Entity entity2 : collideableEntities) {
+				if (collidable.checkCollision(entity2)) {
+					if (entity1.collision != null)
+						entity1.collision.onCollision(entity2);
 				}
 			}
 		}
 	}
 
-	public void ClearAll() {
-		_collideableEntities.clear();
-		_normalEntities.clear();
-		_hudEntities.clear();
-		_toremove.clear();
-		_player = null;
+	public void clearAll() {
+		collideableEntities.clear();
+		normalEntities.clear();
+		hudEntities.clear();
+		toRemove.clear();
+		player = null;
 	}
 
 	public boolean isPlayerDead() {
-		return _player == null;
+		return player == null;
 	}
 
-	public void Remove(Entity entity) {
-		_toremove.add(entity);
+	public void remove(Entity entity) {
+		toRemove.add(entity);
 	}
 
-	public void RenderEntities() {
-		for (Entity entity : _normalEntities) {
-			entity.Render();
+	public void renderEntities() {
+		for (Entity entity : normalEntities) {
+			entity.render();
 		}
 
-		for (Entity entity : _collideableEntities) {
-			entity.Render();
+		for (Entity entity : collideableEntities) {
+			entity.render();
 		}
 
-		Draw.setColor(Color.BLACK);
-		Draw.fillRect(0, 0, 480, 100);
+		GameLib.setColor(Color.BLACK);
+		GameLib.fillRect(0, 0, 480, 100);
 
-		for (Entity entity : _hudEntities) {
-			entity.Render();
+		for (Entity entity : hudEntities) {
+			entity.render();
 		}
 	}
 
 	public void setPlayer(Player player) {
-		_player = player;
+		this.player = player;
 	}
 
-	public void UpdateEntities() {
-		while (_toadd.size() != 0) {
-			Entity tmp = _toadd.get(_toadd.size() - 1);
+	public void updateEntities() {
+		while (toAdd.size() != 0) {
+			Entity tmp = toAdd.get(toAdd.size() - 1);
 			if (tmp instanceof Collidable) {
-				_collideableEntities.add(tmp);
+				collideableEntities.add(tmp);
 			} else if (tmp.getEntityType() == EntityType.HUD) {
-				_hudEntities.add(tmp);
+				hudEntities.add(tmp);
 			} else {
-				_normalEntities.add(tmp);
+				normalEntities.add(tmp);
 			}
-			_toadd.remove(_toadd.size() - 1);
+			toAdd.remove(toAdd.size() - 1);
 		}
-		for (Entity entity : _collideableEntities) {
-			entity.Update();
+		for (Entity entity : collideableEntities) {
+			entity.update();
 		}
-		for (Entity entity : _normalEntities) {
-			entity.Update();
+		for (Entity entity : normalEntities) {
+			entity.update();
 		}
-		for (Entity entity : _hudEntities) {
-			entity.Update();
+		for (Entity entity : hudEntities) {
+			entity.update();
 		}
-		while (_toremove.size() != 0) {
-			Entity tmp = _toremove.get(_toremove.size() - 1);
-			if (_collideableEntities.remove(tmp) || _normalEntities.remove(tmp) || _hudEntities.remove(tmp)) {
-				if (_player != null && tmp == _player) {
-					_player = null;
+		while (toRemove.size() != 0) {
+			Entity tmp = toRemove.get(toRemove.size() - 1);
+			if (collideableEntities.remove(tmp) || normalEntities.remove(tmp)
+					|| hudEntities.remove(tmp)) {
+				if (player != null && tmp == player) {
+					player = null;
 				}
-				_toremove.remove(_toremove.size() - 1);
+				toRemove.remove(toRemove.size() - 1);
 			}
 		}
 

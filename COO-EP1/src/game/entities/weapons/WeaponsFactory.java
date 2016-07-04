@@ -6,25 +6,25 @@ import geometry.Vector2D;
 public abstract class WeaponsFactory {
 
 	public enum WeaponType {
-		EnemyShot, PlayerDeafultShot, PlayerMegaShot, PlayerShield
+		PLAYER_DEFAULT_SHOT, PLAYER_MEGA_SHOT, PLAYER_SHIELD, ENEMY_SHOT
 	};
 
-	public static Weapon CreateWeapon(WeaponType type, Entity owner) {
+	public static Weapon createWeapon(WeaponType weaponType, Entity owner) {
 
-		switch (type) {
-
-		case EnemyShot:
-			return new Weapon(owner, new Vector2D(0.0f, 0.25f), 870, type, 2);
-
-		case PlayerDeafultShot:
-			return new Weapon(owner, new Vector2D(0.0f, 0.50f), 400, type, 0);
-
-		case PlayerMegaShot:
-			return new Weapon(owner, new Vector2D(0.0f, 0.35f), 1000, type, 8);
-			
+		switch (weaponType) {
+		case ENEMY_SHOT:
+			return new Weapon(owner, new Vector2D(0.0f, 0.25f), 870,
+					weaponType, 2);
+		case PLAYER_DEFAULT_SHOT:
+			return new Weapon(owner, new Vector2D(0.0f, 0.50f), 400,
+					weaponType, 0);
+		case PLAYER_MEGA_SHOT:
+			return new Weapon(owner, new Vector2D(0.0f, 0.35f), 1000,
+					weaponType, 8);
+		default:
+			return null;
 		}
 
-		return null;
 	}
 
 }

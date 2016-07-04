@@ -4,5 +4,5 @@ import game.entities.Entity;
 
 public interface CollisionState {
 
-	public void OnCollision(Entity collider);
+	public void onCollision(Entity collider);
 }

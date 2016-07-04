@@ -10,22 +10,23 @@ import game.screenstate.MainGameScreen;
 
 public class Enemy1CollisionState implements CollisionState {
 
-	private Enemy1 _context;
+	private Enemy1 context;
 
 	public Enemy1CollisionState(Enemy1 context) {
-		this._context = context;
+		this.context = context;
 	}
 
 	@Override
-	public void OnCollision(Entity collider) {
+	public void onCollision(Entity collider) {
 
-		if (collider.getEntityType() == EntityType.FriendlyProjectile) {
+		if (collider.getEntityType() == EntityType.FRIENDLY_PROJECTILE) {
 
-			if (((Projectile) collider).getType().equals(WeaponType.PlayerDeafultShot))
-				collider.Remove();
+			if (((Projectile) collider).getWeaponType().equals(
+					WeaponType.PLAYER_DEFAULT_SHOT))
+				collider.remove();
 
-			_context.setState(new ExplodingState(_context, 400));
-			((MainGameScreen) _context.getScreenState()).enemyDied();
+			context.setState(new ExplodingState(context, 400));
+			((MainGameScreen) context.getScreenState()).enemyDied();
 
 		}
 	}

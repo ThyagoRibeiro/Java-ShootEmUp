@@ -9,23 +9,24 @@ import geometry.Vector2D;
 
 public class Weapon implements Cloneable {
 
-	private Vector2D _missilespeed;
-	private boolean _playerUsing;
+	private Vector2D missileSpeed;
+	private boolean playerUsing;
 	private double cooldown;
 	private LocalTime localTime;
 	private Entity owner;
 	private int radius;
 	private WeaponType type;
 
-	public Weapon(Entity owner, Vector2D missilespeed, double cooldown, WeaponType type, int radius) {
+	public Weapon(Entity owner, Vector2D missilespeed, double cooldown,
+			WeaponType type, int radius) {
 		this.owner = owner;
-		this._missilespeed = missilespeed;
+		this.missileSpeed = missilespeed;
 		this.cooldown = cooldown;
 		this.type = type;
 		this.radius = radius;
 		localTime = new LocalTime(cooldown);
-		this._playerUsing = owner instanceof Player;
-		if (_playerUsing)
+		this.playerUsing = owner instanceof Player;
+		if (playerUsing)
 			this.cooldown -= 200;
 	}
 
@@ -42,15 +43,18 @@ public class Weapon implements Cloneable {
 	}
 
 	public void setPlayerUsing(boolean playerUsing) {
-		this._playerUsing = playerUsing;
+		this.playerUsing = playerUsing;
 	}
 
-	public void Shoot() {
+	public void shoot() {
 		if (localTime.hasEnded()) {
-			float centeredX = (float) (owner.getPosition().getX() + owner.getRadius() / 2);
-			float centeredY = (float) (owner.getPosition().getY() + owner.getRadius() / 2);
-			new Projectile(new Vector2D(centeredX, centeredY), _missilespeed, owner.getScreenState(), _playerUsing, type, radius, null);
-			localTime.Start(cooldown);
+			float centeredX = (float) (owner.getPosition().getX() + owner
+					.getRadius() / 2);
+			float centeredY = (float) (owner.getPosition().getY() + owner
+					.getRadius() / 2);
+			new Projectile(new Vector2D(centeredX, centeredY), missileSpeed,
+					owner.getScreenState(), playerUsing, type, radius, null);
+			localTime.start(cooldown);
 		}
 	}
 }

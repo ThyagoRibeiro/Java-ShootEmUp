@@ -10,51 +10,52 @@ import geometry.Vector2D;
 
 public class Projectile extends Entity implements Collidable {
 
-	private WeaponType type;
+	private WeaponType weaponType;
 	private Player player;
 
 	public Player getPlayer() {
 		return player;
 	}
 
-	public Projectile(Vector2D position, Vector2D velocity, ScreenState screenState, boolean playerMissile,
-			WeaponType type, int radius, Player player) {
+	public Projectile(Vector2D position, Vector2D velocity,
+			ScreenState screenState, boolean playerMissile,
+			WeaponType weaponType, int radius, Player player) {
 
 		super(position, velocity, radius, screenState);
 
-		if(player != null){
+		if (player != null) {
 			setPosition(player.getPosition());
 			this.player = player;
 		}
-		
-		this.type = type;
+
+		this.weaponType = weaponType;
 		if (playerMissile) {
-			this._type = EntityType.FriendlyProjectile;
+			this.entityType = EntityType.FRIENDLY_PROJECTILE;
 			velocity.setYToNegative();
 		} else {
-			this._type = EntityType.EnemyProjectile;
+			this.entityType = EntityType.ENEMY_PROJECTILE;
 			velocity.setYToPositive();
 		}
-		this._state = new ActiveProjectileState(this);
+		this.state = new ActiveProjectileState(this);
 	}
 
 	@Override
-	public boolean CheckCollision(Entity other) {
-		return CollisionChecker.CheckCollision(this, other);
+	public boolean checkCollision(Entity other) {
+		return CollisionChecker.checkCollision(this, other);
 	}
 
-	public WeaponType getType() {
-		return type;
-	}
-
-	@Override
-	public void Render() {
-		this._state.Render();
+	public WeaponType getWeaponType() {
+		return weaponType;
 	}
 
 	@Override
-	public void Update() {
-		this._state.Update();
+	public void render() {
+		this.state.render();
+	}
+
+	@Override
+	public void update() {
+		this.state.update();
 	}
 
 }

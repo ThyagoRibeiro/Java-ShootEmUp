@@ -12,23 +12,27 @@ import geometry.Vector2D;
 
 public class Boss2 extends Enemy {
 
-	protected LifeBar _lifeBar;
-	protected Color normalColor = Color.RED, getHitColor = Color.WHITE, currentColor;
+	protected LifeBar lifeBar;
+	protected Color normalColor = Color.RED;
+	protected Color getHitColor = Color.WHITE;
+	protected Color currentColor;
 
-	public Boss2(Vector2D position, ScreenState screenState, int healthPoints, MainGameScreen mainGameScreen) {
-		super(position, new Vector2D((float) (0.05 + Math.random() * 0.10), (float) (0.05 + Math.random() * 0.10)),
-				30.0, screenState, 3 * Math.PI / 2, 0.0);
+	public Boss2(Vector2D position, ScreenState screenState, int healthPoints,
+			MainGameScreen mainGameScreen) {
+		super(position, new Vector2D((float) (0.05 + Math.random() * 0.10),
+				(float) (0.05 + Math.random() * 0.10)), 30.0, screenState,
+				3 * Math.PI / 2, 0.0);
 
-		this._state = new ActiveBoss2State(this);
-		this._collision = new Boss2CollisionState(this);
+		this.state = new ActiveBoss2State(this);
+		this.collision = new Boss2CollisionState(this);
 		currentColor = normalColor;
-		this._type = EntityType.Enemy;
-		_lifeBar = new LifeBar(healthPoints, this);
+		this.entityType = EntityType.ENEMY;
+		lifeBar = new LifeBar(healthPoints, this);
 	}
 
 	@Override
-	public boolean CheckCollision(Entity other) {
-		return CollisionChecker.CheckCollision(this, other);
+	public boolean checkCollision(Entity other) {
+		return CollisionChecker.checkCollision(this, other);
 	}
 
 	public Color getColor() {
@@ -36,12 +40,10 @@ public class Boss2 extends Enemy {
 	}
 
 	public void getHit() {
-		// TODO Auto-generated method stub
 		Thread t = new Thread(new Runnable() {
 
 			@Override
 			public void run() {
-				// TODO Auto-generated method stub
 				for (int i = 0; i < 4; i++) {
 					if (i % 2 == 0)
 						currentColor = getHitColor;
@@ -50,7 +52,6 @@ public class Boss2 extends Enemy {
 					try {
 						Thread.sleep(500);
 					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
@@ -61,17 +62,17 @@ public class Boss2 extends Enemy {
 	}
 
 	public boolean isDead() {
-		return _lifeBar.getCurrentHealthPoints() <= 0;
+		return lifeBar.getCurrentHealthPoints() <= 0;
 	}
 
 	@Override
-	public void Render() {
-		this._state.Render();
+	public void render() {
+		this.state.render();
 	}
 
 	@Override
-	public void Update() {
-		this._state.Update();
+	public void update() {
+		this.state.update();
 	}
 
 }

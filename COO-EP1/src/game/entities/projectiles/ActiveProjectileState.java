@@ -1,13 +1,11 @@
 package game.entities.projectiles;
 
-import java.awt.Color;
-
 import game.GameLib;
 import game.entities.Entity.EntityType;
 import game.entities.state.EntityState;
-import game.entities.weapons.Weapon;
 import game.entities.weapons.WeaponsFactory.WeaponType;
-import game.util.Draw;
+
+import java.awt.Color;
 
 public class ActiveProjectileState implements EntityState {
 
@@ -19,45 +17,54 @@ public class ActiveProjectileState implements EntityState {
 	}
 
 	@Override
-	public void Render() {
-		if (context.getEntityType().equals(EntityType.FriendlyProjectile)) {
-			Draw.setColor(Color.GREEN);
-			if (context.getType().equals(WeaponType.PlayerDeafultShot)) {
-				Draw.drawLine(context.getPosition().getX(), context.getPosition().getY() - 5,
-						context.getPosition().getX(), context.getPosition().getY() + 5);
-				Draw.drawLine(context.getPosition().getX() - 1, context.getPosition().getY() - 3,
-						context.getPosition().getX() - 1, context.getPosition().getY() + 3);
-				Draw.drawLine(context.getPosition().getX() + 1, context.getPosition().getY() - 3,
-						context.getPosition().getX() + 1, context.getPosition().getY() + 3);
-			}
-			if (context.getType().equals(WeaponType.PlayerShield)) {
+	public void render() {
+		if (context.getEntityType().equals(EntityType.FRIENDLY_PROJECTILE)) {
+			GameLib.setColor(Color.GREEN);
+			if (context.getWeaponType().equals(WeaponType.PLAYER_DEFAULT_SHOT)) {
+				GameLib.drawLine(context.getPosition().getX(), context
+						.getPosition().getY() - 5,
+						context.getPosition().getX(), context.getPosition()
+								.getY() + 5);
+				GameLib.drawLine(context.getPosition().getX() - 1, context
+						.getPosition().getY() - 3,
+						context.getPosition().getX() - 1, context.getPosition()
+								.getY() + 3);
+				GameLib.drawLine(context.getPosition().getX() + 1, context
+						.getPosition().getY() - 3,
+						context.getPosition().getX() + 1, context.getPosition()
+								.getY() + 3);
+			} else if (context.getWeaponType().equals(WeaponType.PLAYER_SHIELD)) {
 
-				float x = (float) (context.getPlayer().getPosition().getX()
-						+ 8 * context.getPlayer().getRadius() * Math.sin(angle));
-				float y = (float) (context.getPlayer().getPosition().getY()
-						+ 8 * context.getPlayer().getRadius() * Math.cos(angle));
+				float x = (float) (context.getPlayer().getPosition().getX() + 8
+						* context.getPlayer().getRadius() * Math.sin(angle));
+				float y = (float) (context.getPlayer().getPosition().getY() + 8
+						* context.getPlayer().getRadius() * Math.cos(angle));
 
 				angle = angle + 0.01;
 
 				context.setX(x);
 				context.setY(y);
-				Draw.setColor(Color.GRAY);
-				Draw.fillCircle(x, y, context.getRadius());
+				GameLib.setColor(Color.GRAY);
+				GameLib.fillCircle(x, y, context.getRadius());
 
-			} else {
-				Draw.fillCircle(context.getPosition().getX(), context.getPosition().getY(), context.getRadius());
+			} else if (context.getWeaponType().equals(WeaponType.PLAYER_MEGA_SHOT)) {
+				GameLib.fillCircle(context.getPosition().getX(), context
+						.getPosition().getY(), context.getRadius());
 			}
 
-		} else {
-			Draw.setColor(Color.RED);
-			Draw.fillCircle(context.getPosition().getX(), context.getPosition().getY(), context.getRadius());
+		} else if (context.getEntityType().equals(EntityType.ENEMY_PROJECTILE)) {
+			GameLib.setColor(Color.RED);
+			GameLib.fillCircle(context.getPosition().getX(), context
+					.getPosition().getY(), context.getRadius());
 		}
 	}
 
 	@Override
-	public void Update() {
-		context.UpdatePosition();
-		if (context.getPosition().getY() < -5 || context.getPosition().getY() > GameLib.HEIGHT + 5)
-			context.Remove();
+	public void update() {
+		context.updatePosition();
+		if (context.getPosition().getY() < -5
+				|| context.getPosition().getY() > GameLib.HEIGHT + 5) {
+			context.remove();
+		}
 	}
 }

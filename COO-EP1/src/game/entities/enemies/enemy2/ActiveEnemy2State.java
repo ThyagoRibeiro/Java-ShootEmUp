@@ -1,11 +1,10 @@
 package game.entities.enemies.enemy2;
 
-import java.awt.Color;
-
 import game.GameLib;
 import game.entities.state.EntityState;
-import game.util.Draw;
 import game.util.Time;
+
+import java.awt.Color;
 
 public class ActiveEnemy2State implements EntityState {
 
@@ -16,30 +15,36 @@ public class ActiveEnemy2State implements EntityState {
 	}
 
 	@Override
-	public void Render() {
-		Draw.setColor(Color.MAGENTA);
-		Draw.drawDiamond(context.getPosition().getX(), context.getPosition().getY(), context.getRadius());
+	public void render() {
+		GameLib.setColor(Color.MAGENTA);
+		GameLib.drawDiamond(context.getPosition().getX(), context.getPosition()
+				.getY(), context.getRadius());
 	}
 
 	@Override
-	public void Update() {
+	public void update() {
 
-		if (context.getPosition().getX() < -10 || context.getPosition().getX() > GameLib.WIDTH + 10) {
-			context.Remove();
+		if (context.getPosition().getX() < -10
+				|| context.getPosition().getX() > GameLib.WIDTH + 10) {
+			context.remove();
 		} else {
 			boolean shootNow = false;
 			double previousY = context.getPosition().getY();
-			float curx = (float) (context.getVelocity().getX() * Math.cos(context.getAngle())
-					* Time.getInstance().DeltaTime());
-			float cury = (float) (context.getVelocity().getY() * Math.sin(context.getAngle())
-					* Time.getInstance().DeltaTime() * (-1.0));
+			float curx = (float) (context.getVelocity().getX()
+					* Math.cos(context.getAngle()) * Time.getInstance()
+					.deltaTime());
+			float cury = (float) (context.getVelocity().getY()
+					* Math.sin(context.getAngle())
+					* Time.getInstance().deltaTime() * (-1.0));
 			context.setX(context.getPosition().getX() + curx);
 			context.setY(context.getPosition().getY() + cury);
-			context.setAngle(context.getAngle() + (context.getRV() * Time.getInstance().DeltaTime()));
+			context.setAngle(context.getAngle()
+					+ (context.getRV() * Time.getInstance().deltaTime()));
 
 			double threshold = GameLib.HEIGHT * 0.30;
 
-			if (previousY < threshold && context.getPosition().getY() >= threshold) {
+			if (previousY < threshold
+					&& context.getPosition().getY() >= threshold) {
 
 				if (context.getPosition().getX() < GameLib.WIDTH / 2)
 					context.setRv(0.003);
@@ -47,7 +52,8 @@ public class ActiveEnemy2State implements EntityState {
 					context.setRv(-0.003);
 			}
 
-			if (context.getRV() > 0.0 && Math.abs(context.getAngle() - 3 * Math.PI) < 0.05) {
+			if (context.getRV() > 0.0
+					&& Math.abs(context.getAngle() - 3 * Math.PI) < 0.05) {
 
 				context.setRv(0.0);
 				context.setAngle(3 * Math.PI);
@@ -63,7 +69,7 @@ public class ActiveEnemy2State implements EntityState {
 			}
 
 			if (shootNow) {
-				context.Shoot();
+				context.shoot();
 			}
 		}
 

@@ -2,35 +2,38 @@ package game.util;
 
 public class LocalTime {
 
-	protected double _start, _end, _current;
+	protected double start;
+	protected double end;
+	protected double current;
 
 	public LocalTime() {
-		_end = _start = _current = -1.0;
+		end = start = current = -1.0;
 	}
 
 	public LocalTime(double durationFromNow) {
-		Start(durationFromNow * (1.0 / Time.getInstance().getTimeScale()));
+		start(durationFromNow * (1.0 / Time.getInstance().getTimeScale()));
 	}
 
 	public LocalTime(double start, double end) {
-		this._start = start;
-		this._start = end;
+		this.start = start;
+		this.start = end;
 	}
 
 	public double getEnd() {
-		return this._end;
+		return this.end;
 	}
 
 	public double getStart() {
-		return this._start;
+		return this.start;
 	}
 
 	public boolean hasEnded() {
-		return Time.getInstance().CurrentTime() >= _end;
+		return Time.getInstance().currentTime() >= end;
 	}
 
-	public void Start(double durationFromNow) {
-		_start = Time.getInstance().CurrentTime();
-		_end = _start + (durationFromNow * (1.0 / Time.getInstance().getTimeScale()));
+	public void start(double durationFromNow) {
+		start = Time.getInstance().currentTime();
+		end = start
+				+ (durationFromNow * (1.0 / Time.getInstance().getTimeScale()));
 	}
 }

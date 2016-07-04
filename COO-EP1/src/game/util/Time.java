@@ -2,43 +2,43 @@ package game.util;
 
 public class Time {
 
-	private static Time _INSTANCE = new Time();
+	private static Time INSTANCE = new Time();
 
 	public static Time getInstance() {
-		if (_INSTANCE == null) {
-			_INSTANCE = new Time();
+		if (INSTANCE == null) {
+			INSTANCE = new Time();
 		}
 
-		return _INSTANCE;
+		return INSTANCE;
 	}
 
-	private long _currentTimeMilis;
-	private long _delta;
-	private double _timeScale;
+	private long currentTimeMilis;
+	private long delta;
+	private double timeScale;
 
 	protected Time() {
-		_currentTimeMilis = System.currentTimeMillis();
-		_timeScale = 1.0;
+		currentTimeMilis = System.currentTimeMillis();
+		timeScale = 1.0;
 	}
 
-	public long CurrentTime() {
+	public long currentTime() {
 		return System.currentTimeMillis();
 	}
 
-	public long DeltaTime() {
-		return (long) (_delta * _timeScale);
+	public long deltaTime() {
+		return (long) (delta * timeScale);
 	}
 
 	public double getTimeScale() {
-		return this._timeScale;
+		return this.timeScale;
 	}
 
 	public void setTimeScale(double timeScale) {
-		this._timeScale = timeScale;
+		this.timeScale = timeScale;
 	}
 
-	public void UpdateDelta() {
-		_delta = System.currentTimeMillis() - _currentTimeMilis;
-		_currentTimeMilis = System.currentTimeMillis();
+	public void updateDelta() {
+		delta = System.currentTimeMillis() - currentTimeMilis;
+		currentTimeMilis = System.currentTimeMillis();
 	}
 }

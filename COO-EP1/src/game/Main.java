@@ -18,11 +18,11 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		if (args.length == 1)
+		if (args.length == 1) {
 			readArchives(args[0]);
-		else
+		} else {
 			readArchives("game.txt");
-
+		}
 		GameCore gm = new GameCore(playerHealthPoints, stages);
 		gm.start();
 	}
@@ -36,7 +36,8 @@ public class Main {
 
 		try {
 			InputStream fis = new FileInputStream(fileName);
-			InputStreamReader isr = new InputStreamReader(fis, Charset.forName("UTF-8"));
+			InputStreamReader isr = new InputStreamReader(fis,
+					Charset.forName("UTF-8"));
 			BufferedReader br = new BufferedReader(isr);
 
 			playerHealthPoints = Integer.parseInt(br.readLine());
@@ -62,16 +63,23 @@ public class Main {
 					words = line.split(" ");
 
 					if (words[0].equals("INIMIGO")) {
-						stage.addEnemy(Integer.parseInt(words[1]), Integer.parseInt(words[2]),
-								Integer.parseInt(words[3]), Integer.parseInt(words[4]));
+						stage.addEnemy(Integer.parseInt(words[1]),
+								Integer.parseInt(words[2]),
+								Integer.parseInt(words[3]),
+								Integer.parseInt(words[4]));
 
 					} else if (words[0].equals("POWERUP")) {
-						stage.addPowerup(Integer.parseInt(words[1]), Integer.parseInt(words[2]),
-								Integer.parseInt(words[3]), Integer.parseInt(words[4]));
+						stage.addPowerup(Integer.parseInt(words[1]),
+								Integer.parseInt(words[2]),
+								Integer.parseInt(words[3]),
+								Integer.parseInt(words[4]));
 
 					} else if (words[0].equals("CHEFE")) {
-						stage.addBoss(Integer.parseInt(words[1]), Integer.parseInt(words[2]),
-								Integer.parseInt(words[3]), Integer.parseInt(words[4]), Integer.parseInt(words[2]));
+						stage.addBoss(Integer.parseInt(words[1]),
+								Integer.parseInt(words[2]),
+								Integer.parseInt(words[3]),
+								Integer.parseInt(words[4]),
+								Integer.parseInt(words[2]));
 					}
 
 				}
@@ -82,10 +90,8 @@ public class Main {
 			}
 
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

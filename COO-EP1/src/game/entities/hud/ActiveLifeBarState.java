@@ -1,10 +1,10 @@
 package game.entities.hud;
 
-import java.awt.Color;
-
+import game.GameLib;
 import game.entities.Entity.EntityType;
 import game.entities.state.EntityState;
-import game.util.Draw;
+
+import java.awt.Color;
 
 public class ActiveLifeBarState implements EntityState {
 
@@ -15,18 +15,20 @@ public class ActiveLifeBarState implements EntityState {
 	}
 
 	@Override
-	public void Render() {
-		if (context.getCharacterType().equals(EntityType.Player)) {
-			Draw.setColor(Color.BLUE);
-			Draw.drawLifeBar(10, 70, 150, 30, context.getLifePointsPercent(), "Player");
+	public void render() {
+		if (context.getCharacterType().equals(EntityType.PLAYER)) {
+			GameLib.setColor(Color.BLUE);
+			GameLib.drawLifeBar(10, 70, 150, 30,
+					context.getLifePointsPercent(), "Player");
 		} else {
-			Draw.setColor(Color.RED);
-			Draw.drawLifeBar(320, 70, 150, 30, context.getLifePointsPercent(), "Chefe");
+			GameLib.setColor(Color.RED);
+			GameLib.drawLifeBar(320, 70, 150, 30,
+					context.getLifePointsPercent(), "Chefe");
 		}
 	}
 
 	@Override
-	public void Update() {
+	public void update() {
 
 	}
 }

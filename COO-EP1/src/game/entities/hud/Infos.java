@@ -3,7 +3,9 @@ package game.entities.hud;
 import game.entities.Entity;
 import game.entities.player.Player;
 import game.util.LocalTime;
-import game.util.Time;;
+import game.util.Time;
+
+;
 
 public class Infos extends Entity {
 
@@ -12,11 +14,12 @@ public class Infos extends Entity {
 	private Player player;
 
 	public Infos(Player player) {
-		super(player.getPosition(), player.getVelocity(), player.getRadius(), player.getScreenState());
+		super(player.getPosition(), player.getVelocity(), player.getRadius(),
+				player.getScreenState());
 		this.player = player;
 		this.stageNumber = player.getMainGameScreen().getStageNumber();
-		this._state = new ActiveInfosState(this);
-		this._type = EntityType.HUD;
+		this.state = new ActiveInfosState(this);
+		this.entityType = EntityType.HUD;
 	}
 
 	public Player getPlayer() {
@@ -28,17 +31,17 @@ public class Infos extends Entity {
 	}
 
 	public int getTime() {
-		return ((int) (Time.getInstance().CurrentTime() - localTime.getStart())) / 1000;
+		return ((int) (Time.getInstance().currentTime() - localTime.getStart())) / 1000;
 	}
 
 	@Override
-	public void Render() {
-		this._state.Render();
+	public void render() {
+		this.state.render();
 	}
 
 	@Override
-	public void Update() {
-		this._state.Update();
+	public void update() {
+		this.state.update();
 	}
 
 }

@@ -1,12 +1,11 @@
 package game.entities.powerup.powerup2;
 
-import java.awt.Color;
-
 import game.GameLib;
 import game.entities.state.EntityState;
-import game.util.Draw;
 import game.util.Time;
 import geometry.Vector2D;
+
+import java.awt.Color;
 
 public class ActivePowerUp2State implements EntityState {
 
@@ -17,23 +16,27 @@ public class ActivePowerUp2State implements EntityState {
 	}
 
 	@Override
-	public void Render() {
-		Draw.setColor(Color.PINK);
-		Draw.drawCircle(context.getPosition().getX(), context.getPosition().getY(), context.getRadius());
-		Draw.writeInCircle(context.getPosition().getX(), context.getPosition().getY(), "M", context.getRadius());
+	public void render() {
+		GameLib.setColor(Color.PINK);
+		GameLib.drawCircle(context.getPosition().getX(), context.getPosition()
+				.getY(), context.getRadius());
+		GameLib.writeInCircle(context.getPosition().getX(), context
+				.getPosition().getY(), "M", context.getRadius());
 	}
 
 	@Override
-	public void Update() {
+	public void update() {
 		if (context.getPosition().getY() > GameLib.HEIGHT + 10) {
-			context.Remove();
+			context.remove();
 		} else {
 			float curX = context.getPosition().getX();
 			float curY = context.getPosition().getY();
 			double angle = context.getAngle();
-			curX += context.getVelocity().getX() * Math.cos(angle) * Time.getInstance().DeltaTime();
-			curY -= context.getVelocity().getY() * Math.sin(angle) * Time.getInstance().DeltaTime();
-			angle += context.getRV() * Time.getInstance().DeltaTime();
+			curX += context.getVelocity().getX() * Math.cos(angle)
+					* Time.getInstance().deltaTime();
+			curY -= context.getVelocity().getY() * Math.sin(angle)
+					* Time.getInstance().deltaTime();
+			angle += context.getRV() * Time.getInstance().deltaTime();
 			context.setPosition(new Vector2D(curX, curY));
 			context.setAngle(angle);
 		}

@@ -1,7 +1,7 @@
 package game.entities.state;
 
 public interface EntityState {
-	public void Render();
+	public void render();
 
-	public void Update();
+	public void update();
 }

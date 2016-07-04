@@ -8,40 +8,42 @@ import geometry.Vector2D;
 
 public abstract class Enemy extends Entity implements Collidable {
 
-	protected double _angle, _rv;
-	protected Weapon _weapon;
+	protected double angle;
+	protected double rv;
+	protected Weapon weapon;
 
-	public Enemy(Vector2D position, Vector2D velocity, double radius, ScreenState screenState, double angle,
-			double rv) {
+	public Enemy(Vector2D position, Vector2D velocity, double radius,
+			ScreenState screenState, double angle, double rv) {
 		super(position, velocity, radius, screenState);
-		this._angle = angle;
-		this._rv = rv;
-		this._type = EntityType.Enemy;
+		this.angle = angle;
+		this.rv = rv;
+		this.entityType = EntityType.ENEMY;
 	}
 
 	public double getAngle() {
-		return this._angle;
+		return this.angle;
 	}
 
 	public double getRV() {
-		return this._rv;
+		return this.rv;
 	}
 
 	public void setAngle(double angle) {
-		this._angle = angle;
+		this.angle = angle;
 	}
 
 	public void setRv(double rv) {
-		this._rv = rv;
+		this.rv = rv;
 	}
 
 	public void setWeapon(Weapon weapon) {
-		this._weapon = weapon;
+		this.weapon = weapon;
 	}
 
-	public void Shoot() {
-		if (_weapon == null)
+	public void shoot() {
+		if (weapon == null) {
 			return;
-		_weapon.Shoot();
+		}
+		weapon.shoot();
 	}
 }

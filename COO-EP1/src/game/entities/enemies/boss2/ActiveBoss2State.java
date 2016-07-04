@@ -2,7 +2,6 @@ package game.entities.enemies.boss2;
 
 import game.GameLib;
 import game.entities.state.EntityState;
-import game.util.Draw;
 import game.util.LocalTime;
 import game.util.Time;
 import geometry.Vector2D;
@@ -23,15 +22,17 @@ public class ActiveBoss2State implements EntityState {
 	}
 
 	@Override
-	public void Render() {
+	public void render() {
 
-		Draw.setColor(context.getColor());
-		Draw.drawDiamond(context.getPosition().getX(), context.getPosition().getY(), context.getRadius());
-		Draw.fillCircle(context.getPosition().getX(), context.getPosition().getY(), context.getRadius());
+		GameLib.setColor(context.getColor());
+		GameLib.drawDiamond(context.getPosition().getX(), context.getPosition()
+				.getY(), context.getRadius());
+		GameLib.fillCircle(context.getPosition().getX(), context.getPosition()
+				.getY(), context.getRadius());
 	}
 
 	@Override
-	public void Update() {
+	public void update() {
 		if (context.getPosition().getY() <= 0) {
 			context.setPosition(new Vector2D(1, 150));
 		} else {
@@ -47,18 +48,20 @@ public class ActiveBoss2State implements EntityState {
 			}
 
 			if (counterGoes % 2 == 1) {
-				curX += context.getVelocity().getX() * Math.sin(angle) * Time.getInstance().DeltaTime();
+				curX += context.getVelocity().getX() * Math.sin(angle)
+						* Time.getInstance().deltaTime();
 			} else {
-				curX -= context.getVelocity().getX() * Math.sin(angle) * Time.getInstance().DeltaTime();
+				curX -= context.getVelocity().getX() * Math.sin(angle)
+						* Time.getInstance().deltaTime();
 			}
 
-			angle += context.getRV() * Time.getInstance().DeltaTime();
+			angle += context.getRV() * Time.getInstance().deltaTime();
 			context.setPosition(new Vector2D(curX, curY));
 			context.setAngle(angle);
 		}
 		if (shootTime.hasEnded()) {
-			context.Shoot();
-			shootTime.Start(Math.random() * waitTime);
+			context.shoot();
+			shootTime.start(Math.random() * waitTime);
 		}
 	}
 }

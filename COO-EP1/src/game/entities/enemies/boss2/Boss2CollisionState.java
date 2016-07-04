@@ -10,30 +10,30 @@ import game.screenstate.MainGameScreen;
 
 public class Boss2CollisionState implements CollisionState {
 
-	private Boss2 _context;
+	private Boss2 context;
 
 	public Boss2CollisionState(Boss2 context) {
-		this._context = context;
+		this.context = context;
 	}
 
 	@Override
-	public void OnCollision(Entity collider) {
-		if (collider.getEntityType() == EntityType.FriendlyProjectile) {
+	public void onCollision(Entity collider) {
+		if (collider.getEntityType() == EntityType.FRIENDLY_PROJECTILE) {
 
-			if (((Projectile) collider).getType().equals(WeaponType.PlayerMegaShot)) {
-				_context._lifeBar.decreaseCurrentHealthPoints();
-
+			if (((Projectile) collider).getWeaponType().equals(
+					WeaponType.PLAYER_MEGA_SHOT)) {
+				context.lifeBar.decreaseCurrentHealthPoints();
 			}
-			
-			_context._lifeBar.decreaseCurrentHealthPoints();
-			collider.Remove();
 
-			if (_context.isDead()) {
-				_context.setState(new ExplodingState(_context, 400));
-				((MainGameScreen) _context.getScreenState()).enemyDied();
-				((MainGameScreen) _context.getScreenState()).setBossIsDead(true);
+			context.lifeBar.decreaseCurrentHealthPoints();
+			collider.remove();
+
+			if (context.isDead()) {
+				context.setState(new ExplodingState(context, 400));
+				((MainGameScreen) context.getScreenState()).enemyDied();
+				((MainGameScreen) context.getScreenState()).setBossIsDead(true);
 			} else {
-				_context.getHit();
+				context.getHit();
 			}
 		}
 	}

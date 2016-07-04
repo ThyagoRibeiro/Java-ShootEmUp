@@ -1,18 +1,20 @@
 package game.entities.hud;
 
-import game.entities.Entity;;
+import game.entities.Entity;
 
 public class LifeBar extends Entity {
 
 	private EntityType characterType;
-	private double maxHealthPoints, currentHealthPoints;
+	private double maxHealthPoints;
+	private double currentHealthPoints;
 
 	public LifeBar(int healthPoints, Entity character) {
-		super(character.getPosition(), character.getVelocity(), character.getRadius(), character.getScreenState());
+		super(character.getPosition(), character.getVelocity(), character
+				.getRadius(), character.getScreenState());
 		this.characterType = character.getEntityType();
 		this.maxHealthPoints = this.currentHealthPoints = healthPoints;
-		this._state = new ActiveLifeBarState(this);
-		this._type = EntityType.HUD;
+		this.state = new ActiveLifeBarState(this);
+		this.entityType = EntityType.HUD;
 	}
 
 	public void decreaseCurrentHealthPoints() {
@@ -32,13 +34,13 @@ public class LifeBar extends Entity {
 	}
 
 	@Override
-	public void Render() {
-		this._state.Render();
+	public void render() {
+		this.state.render();
 	}
 
 	@Override
-	public void Update() {
-		this._state.Update();
+	public void update() {
+		this.state.update();
 	}
 
 }

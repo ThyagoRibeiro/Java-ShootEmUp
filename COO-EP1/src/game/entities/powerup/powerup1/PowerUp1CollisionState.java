@@ -6,17 +6,17 @@ import game.entities.player.Player;
 
 public class PowerUp1CollisionState implements CollisionState {
 
-	private PowerUp1 _context;
+	private PowerUp1 context;
 
 	public PowerUp1CollisionState(PowerUp1 context) {
-		this._context = context;
+		this.context = context;
 	}
 
 	@Override
-	public void OnCollision(Entity collider) {
+	public void onCollision(Entity collider) {
 		switch (collider.getEntityType()) {
-		case Player:
-			_context.Remove();
+		case PLAYER:
+			context.remove();
 			((Player) collider).addShield();
 			break;
 		default:

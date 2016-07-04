@@ -4,22 +4,22 @@ import game.entities.EntityManager;
 
 public abstract class ScreenState {
 
-	protected EntityManager _entityManager;
+	protected EntityManager entityManager;
 
 	public ScreenState() {
-		this._entityManager = new EntityManager();
+		this.entityManager = new EntityManager();
 	}
 
-	public abstract void Draw(ScreenContext context);
+	public abstract void draw(ScreenContext context);
 
 	public EntityManager getEntityManager() {
-		return this._entityManager;
+		return this.entityManager;
 	}
 
-	public abstract void OnEnter(ScreenContext context);
+	public abstract void onEnter(ScreenContext context);
 
-	public abstract void OnLeave(ScreenContext context);
+	public abstract void onLeave(ScreenContext context);
 
-	public abstract void Update(ScreenContext context);
+	public abstract void update(ScreenContext context);
 
 }

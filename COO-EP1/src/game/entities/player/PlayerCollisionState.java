@@ -13,15 +13,15 @@ public class PlayerCollisionState implements CollisionState {
 	}
 
 	@Override
-	public void OnCollision(Entity collider) {
-		
+	public void onCollision(Entity collider) {
+
 		switch (collider.getEntityType()) {
 
-		case Enemy:
-		case EnemyProjectile:
+		case ENEMY:
+		case ENEMY_PROJECTILE:
 
-			collider.Remove();
-			context._lifeBar.decreaseCurrentHealthPoints();
+			collider.remove();
+			context.lifeBar.decreaseCurrentHealthPoints();
 
 			if (context.isDead()) {
 				context.setState(new ExplodingState(context, 600));

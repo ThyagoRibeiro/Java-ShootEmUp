@@ -7,18 +7,20 @@ import game.entities.weapons.WeaponsFactory;
 
 public class PowerUp2CollisionState implements CollisionState {
 
-	private PowerUp2 _context;
+	private PowerUp2 context;
 
 	public PowerUp2CollisionState(PowerUp2 context) {
-		this._context = context;
+		this.context = context;
 	}
 
 	@Override
-	public void OnCollision(Entity collider) {
+	public void onCollision(Entity collider) {
 		switch (collider.getEntityType()) {
-		case Player:
-			_context.Remove();
-			((Player) collider).setWeapon(WeaponsFactory.CreateWeapon(WeaponsFactory.WeaponType.PlayerMegaShot, (Player) collider));
+		case PLAYER:
+			context.remove();
+			((Player) collider).setWeapon(WeaponsFactory
+					.createWeapon(WeaponsFactory.WeaponType.PLAYER_MEGA_SHOT,
+							(Player) collider));
 			break;
 		default:
 			break;

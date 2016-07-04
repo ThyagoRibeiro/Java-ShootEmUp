@@ -9,25 +9,26 @@ import geometry.Vector2D;
 
 public class Enemy2 extends Enemy {
 
-	public Enemy2(Vector2D position, Vector2D velocity, ScreenState screenState, MainGameScreen mainGameScreen) {
+	public Enemy2(Vector2D position, Vector2D velocity,
+			ScreenState screenState, MainGameScreen mainGameScreen) {
 		super(position, velocity, 9.0, screenState, 3 * Math.PI / 2, 0.0);
-		this._state = new ActiveEnemy2State(this);
-		this._collision = new Enemy2CollisionState(this);
+		this.state = new ActiveEnemy2State(this);
+		this.collision = new Enemy2CollisionState(this);
 	}
 
 	@Override
-	public boolean CheckCollision(Entity other) {
-		return CollisionChecker.CheckCollision(this, other);
+	public boolean checkCollision(Entity other) {
+		return CollisionChecker.checkCollision(this, other);
 	}
 
 	@Override
-	public void Render() {
-		this._state.Render();
+	public void render() {
+		this.state.render();
 	}
 
 	@Override
-	public void Update() {
-		this._state.Update();
+	public void update() {
+		this.state.update();
 
 	}
 

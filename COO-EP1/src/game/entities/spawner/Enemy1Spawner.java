@@ -1,6 +1,5 @@
 package game.entities.spawner;
 
-import game.entities.Entity;
 import game.entities.enemies.enemy1.Enemy1;
 import game.entities.weapons.WeaponsFactory;
 import game.entities.weapons.WeaponsFactory.WeaponType;
@@ -11,13 +10,15 @@ public class Enemy1Spawner extends EntitySpawner {
 
 	MainGameScreen mainGameScreen;
 
-	public Enemy1Spawner(SpawnManager _spawnManager, int when, int x, int y) {
-		super(_spawnManager, when, x, y);
+	public Enemy1Spawner(SpawnManager spawnManager, int when, int x, int y) {
+		super(spawnManager, when, x, y);
 	}
 
 	@Override
-	protected void Spawn(int x, int y) {
-		Enemy1 enemy = new Enemy1(new Vector2D(x, y), _spawnManager.getScreenState(), mainGameScreen);
-		enemy.setWeapon(WeaponsFactory.CreateWeapon(WeaponType.EnemyShot, enemy));
+	protected void spawn(int x, int y) {
+		Enemy1 enemy = new Enemy1(new Vector2D(x, y),
+				spawnManager.getScreenState(), mainGameScreen);
+		enemy.setWeapon(WeaponsFactory
+				.createWeapon(WeaponType.ENEMY_SHOT, enemy));
 	}
 }
