@@ -9,16 +9,17 @@ import geometry.Vector2D;
 public class ActiveBoss2State implements EntityState {
 
 	private Boss2 context;
-	private int counterGoes;
+	private boolean goingRight;
 	private LocalTime shootTime;
 
 	private double waitTime;
 
 	public ActiveBoss2State(Boss2 context) {
-		waitTime = 1000;
+		waitTime = 100;
 		this.context = context;
+		goingRight = true;
 		shootTime = new LocalTime(Math.random() * waitTime);
-		counterGoes = 0;
+		
 	}
 
 	@Override
@@ -27,38 +28,33 @@ public class ActiveBoss2State implements EntityState {
 		GameLib.setColor(context.getColor());
 		GameLib.drawDiamond(context.getPosition().getX(), context.getPosition()
 				.getY(), context.getRadius());
-		GameLib.fillCircle(context.getPosition().getX(), context.getPosition()
+		GameLib.drawCircle(context.getPosition().getX(), context.getPosition()
 				.getY(), context.getRadius());
 	}
 
 	@Override
 	public void update() {
-		if (context.getPosition().getY() <= 0) {
-			context.setPosition(new Vector2D(1, 150));
-		} else {
-			float curX = context.getPosition().getX();
-			float curY = context.getPosition().getY();
-			double angle = context.getAngle();
-
-			if (context.getPosition().getX() <= 0) {
-				counterGoes++;
-			}
-			if ((context.getPosition().getX() + context.getRadius()) >= GameLib.WIDTH) {
-				counterGoes++;
-			}
-
-			if (counterGoes % 2 == 1) {
-				curX += context.getVelocity().getX() * Math.sin(angle)
-						* Time.getInstance().deltaTime();
-			} else {
-				curX -= context.getVelocity().getX() * Math.sin(angle)
-						* Time.getInstance().deltaTime();
-			}
-
-			angle += context.getRV() * Time.getInstance().deltaTime();
-			context.setPosition(new Vector2D(curX, curY));
-			context.setAngle(angle);
+		float curX = context.getPosition().getX();
+		float curY = context.getPosition().getY();
+		
+		//Se chegar no limite direito da tela
+		if(curX == GameLib.WIDTH){
+			goingRight = false;
 		}
+		//Se chegar no limite esquerdo da tela
+		if(curX == 1){
+			goingRight = true;
+		}
+		
+		if(goingRight){
+			curX++;
+		}
+		else{
+			curX--;
+		}		
+		
+		context.setPosition(new Vector2D(curX, curY));			
+		
 		if (shootTime.hasEnded()) {
 			context.shoot();
 			shootTime.start(Math.random() * waitTime);
