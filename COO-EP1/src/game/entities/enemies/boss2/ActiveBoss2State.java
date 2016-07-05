@@ -38,19 +38,19 @@ public class ActiveBoss2State implements EntityState {
 		float curY = context.getPosition().getY();
 		
 		//Se chegar no limite direito da tela
-		if( (curX + context.getRadius()) == GameLib.WIDTH){
+		if( (curX + context.getRadius()) >= GameLib.WIDTH){
 			goingRight = false;
 		}
 		//Se chegar no limite esquerdo da tela
-		if(curX == 1){
+		if((curX - context.getRadius()) <= 0){
 			goingRight = true;
 		}
 		
 		if(goingRight){
-			curX++;
+			curX += context.getVelocity().getX()*9;
 		}
 		else{
-			curX--;
+			curX -= context.getVelocity().getX()*9;
 		}		
 		
 		context.setPosition(new Vector2D(curX, curY));			
