@@ -76,15 +76,32 @@ public class ActiveBoss2State implements EntityState {
 		}
 
 		if (goingRight) {
-			curX += context.getVelocity().getCoordX() * 9;
+			if(curX >= (GameLib.WIDTH * 0.375) && curX < (GameLib.WIDTH * 0.375+1) && curY <= (GameLib.HEIGHT/3)){
+				curY += context.getVelocity().getCoordX() * 15;
+			}else{
+				if(curX >= (GameLib.WIDTH * 0.625) && curX < (GameLib.WIDTH * 0.625+1) && curY >= 130){
+					curY -= context.getVelocity().getCoordX() * 15;
+				}else{
+					curX += context.getVelocity().getCoordX() * 9;
+				}
+			}
 		} else {
-			curX -= context.getVelocity().getCoordX() * 9;
+			if(curX >= (GameLib.WIDTH * 0.625) && curX < (GameLib.WIDTH * 0.625+1) && curY <= (GameLib.HEIGHT/3)){
+				curY += context.getVelocity().getCoordX() * 15;
+			}else{
+				if(curX >= (GameLib.WIDTH * 0.375) && curX < (GameLib.WIDTH * 0.375+1) && curY >= 130){
+					curY -= context.getVelocity().getCoordX() * 15;
+				}else{
+					curX -= context.getVelocity().getCoordX() * 9;
+				}
+			}
 		}
 
 		context.setPosition(new Vector2D(curX, curY));
 
 		if (shootTime.hasEnded()) {
 			context.shoot();
+			
 			shootTime.start(Math.random() * waitTime);
 		}
 	}
