@@ -3,13 +3,12 @@ package game.entities.enemies.boss2;
 import game.GameLib;
 import game.entities.state.EntityState;
 import game.util.LocalTime;
-import game.util.Time;
 import geometry.Vector2D;
 
 public class ActiveBoss2State implements EntityState {
 
 	private Boss2 context;
-	private int counterGoes;
+	private boolean goingRight;
 	private LocalTime shootTime;
 	private double waitTime;
 
@@ -17,9 +16,9 @@ public class ActiveBoss2State implements EntityState {
 
 	public ActiveBoss2State(Boss2 context) {
 		this.context = context;
-		counterGoes = 0;
+		goingRight = true;
 		shootTime = new LocalTime(Math.random() * waitTime);
-		waitTime = 1000;
+		waitTime = 100;
 	}
 
 	/* GETTERS E SETTES - INICIO */
@@ -30,14 +29,6 @@ public class ActiveBoss2State implements EntityState {
 
 	public void setContext(Boss2 context) {
 		this.context = context;
-	}
-
-	public int getCounterGoes() {
-		return counterGoes;
-	}
-
-	public void setCounterGoes(int counterGoes) {
-		this.counterGoes = counterGoes;
 	}
 
 	public LocalTime getShootTime() {
@@ -66,38 +57,32 @@ public class ActiveBoss2State implements EntityState {
 		GameLib.setColor(context.getCurrentColor());
 		GameLib.drawDiamond(context.getPosition().getCoordX(), context
 				.getPosition().getCoordY(), context.getRadius());
-		GameLib.fillCircle(context.getPosition().getCoordX(), context
+		GameLib.drawCircle(context.getPosition().getCoordX(), context
 				.getPosition().getCoordY(), context.getRadius());
 	}
 
 	@Override
 	public void update() {
-		if (context.getPosition().getCoordY() <= 0) {
-			context.setPosition(new Vector2D(1, 150));
-		} else {
-			float curX = context.getPosition().getCoordX();
-			float curY = context.getPosition().getCoordY();
-			double angle = context.getAngle();
+		float curX = context.getPosition().getCoordX();
+		float curY = context.getPosition().getCoordY();
 
-			if (context.getPosition().getCoordX() <= 0) {
-				counterGoes++;
-			}
-			if ((context.getPosition().getCoordX() + context.getRadius()) >= GameLib.WIDTH) {
-				counterGoes++;
-			}
-
-			if (counterGoes % 2 == 1) {
-				curX += context.getVelocity().getCoordX() * Math.sin(angle)
-						* Time.getInstance().deltaTime();
-			} else {
-				curX -= context.getVelocity().getCoordX() * Math.sin(angle)
-						* Time.getInstance().deltaTime();
-			}
-
-			angle += context.getRV() * Time.getInstance().deltaTime();
-			context.setPosition(new Vector2D(curX, curY));
-			context.setAngle(angle);
+		// Se chegar no limite direito da tela
+		if ((curX + context.getRadius()) >= GameLib.WIDTH) {
+			goingRight = false;
 		}
+		// Se chegar no limite esquerdo da tela
+		if ((curX - context.getRadius()) <= 0) {
+			goingRight = true;
+		}
+
+		if (goingRight) {
+			curX += context.getVelocity().getCoordX() * 9;
+		} else {
+			curX -= context.getVelocity().getCoordX() * 9;
+		}
+
+		context.setPosition(new Vector2D(curX, curY));
+
 		if (shootTime.hasEnded()) {
 			context.shoot();
 			shootTime.start(Math.random() * waitTime);
