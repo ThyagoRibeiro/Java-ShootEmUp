@@ -1,8 +1,8 @@
 package game;
 
 import game.screenstate.ScreenContext;
-import game.stage.Stage;
-import game.util.Time;
+import game.stages.Stage;
+import game.utils.Time;
 
 import java.util.ArrayList;
 

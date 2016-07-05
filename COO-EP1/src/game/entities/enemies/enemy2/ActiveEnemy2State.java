@@ -1,8 +1,8 @@
 package game.entities.enemies.enemy2;
 
 import game.GameLib;
-import game.entities.state.EntityState;
-import game.util.Time;
+import game.entities.states.EntityState;
+import game.utils.Time;
 
 import java.awt.Color;
 

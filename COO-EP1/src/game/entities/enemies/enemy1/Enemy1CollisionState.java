@@ -1,11 +1,11 @@
 package game.entities.enemies.enemy1;
 
 import game.entities.Entity;
-import game.entities.collision.CollisionState;
+import game.entities.collisions.CollisionState;
 import game.entities.constants.EntityTypeEnum;
 import game.entities.constants.WeaponTypeEnum;
 import game.entities.projectiles.Projectile;
-import game.entities.state.ExplodingState;
+import game.entities.states.ExplodingState;
 import game.screenstate.MainGameScreen;
 
 public class Enemy1CollisionState implements CollisionState {

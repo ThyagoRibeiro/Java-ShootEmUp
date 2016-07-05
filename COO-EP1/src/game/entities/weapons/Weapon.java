@@ -1,11 +1,11 @@
 package game.entities.weapons;
 
+import game.Vector2D;
 import game.entities.Entity;
 import game.entities.constants.WeaponTypeEnum;
-import game.entities.player.Player;
+import game.entities.players.Player;
 import game.entities.projectiles.Projectile;
-import game.util.LocalTime;
-import geometry.Vector2D;
+import game.utils.LocalTime;
 
 public class Weapon implements Cloneable {
 

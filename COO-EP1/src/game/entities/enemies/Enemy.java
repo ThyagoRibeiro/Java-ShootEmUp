@@ -1,11 +1,11 @@
 package game.entities.enemies;
 
+import game.Vector2D;
 import game.entities.Entity;
-import game.entities.collision.Collidable;
+import game.entities.collisions.Collidable;
 import game.entities.constants.EntityTypeEnum;
 import game.entities.weapons.Weapon;
 import game.screenstate.ScreenState;
-import geometry.Vector2D;
 
 public abstract class Enemy extends Entity implements Collidable {
 

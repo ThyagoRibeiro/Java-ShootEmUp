@@ -1,10 +1,10 @@
 package game.entities.enemies.enemy1;
 
 import game.GameLib;
-import game.entities.state.EntityState;
-import game.util.LocalTime;
-import game.util.Time;
-import geometry.Vector2D;
+import game.Vector2D;
+import game.entities.states.EntityState;
+import game.utils.LocalTime;
+import game.utils.Time;
 
 import java.awt.Color;
 

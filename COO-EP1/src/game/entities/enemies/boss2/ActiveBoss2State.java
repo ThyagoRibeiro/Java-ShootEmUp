@@ -1,9 +1,9 @@
 package game.entities.enemies.boss2;
 
 import game.GameLib;
-import game.entities.state.EntityState;
-import game.util.LocalTime;
-import geometry.Vector2D;
+import game.Vector2D;
+import game.entities.states.EntityState;
+import game.utils.LocalTime;
 
 public class ActiveBoss2State implements EntityState {
 

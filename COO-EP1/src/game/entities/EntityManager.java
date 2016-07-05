@@ -1,9 +1,9 @@
 package game.entities;
 
 import game.GameLib;
-import game.entities.collision.Collidable;
+import game.entities.collisions.Collidable;
 import game.entities.constants.EntityTypeEnum;
-import game.entities.player.Player;
+import game.entities.players.Player;
 
 import java.awt.Color;
 import java.util.ArrayList;

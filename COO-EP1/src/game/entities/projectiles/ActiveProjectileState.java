@@ -3,7 +3,7 @@ package game.entities.projectiles;
 import game.GameLib;
 import game.entities.constants.EntityTypeEnum;
 import game.entities.constants.WeaponTypeEnum;
-import game.entities.state.EntityState;
+import game.entities.states.EntityState;
 
 import java.awt.Color;
 

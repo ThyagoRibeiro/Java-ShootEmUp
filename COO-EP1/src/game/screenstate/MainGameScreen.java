@@ -1,22 +1,22 @@
 package game.screenstate;
 
-import game.entities.background.Background;
+import game.Vector2D;
+import game.entities.backgrounds.Background;
 import game.entities.constants.WeaponTypeEnum;
-import game.entities.player.Player;
-import game.entities.spawner.Boss1Spawner;
-import game.entities.spawner.Boss2Spawner;
-import game.entities.spawner.Enemy1Spawner;
-import game.entities.spawner.Enemy2Spawner;
-import game.entities.spawner.PowerUp1Spawner;
-import game.entities.spawner.PowerUp2Spawner;
-import game.entities.spawner.SpawnManager;
+import game.entities.players.Player;
+import game.entities.spawners.Boss1Spawner;
+import game.entities.spawners.Boss2Spawner;
+import game.entities.spawners.Enemy1Spawner;
+import game.entities.spawners.Enemy2Spawner;
+import game.entities.spawners.PowerUp1Spawner;
+import game.entities.spawners.PowerUp2Spawner;
+import game.entities.spawners.SpawnManager;
 import game.entities.weapons.WeaponsFactory;
-import game.stage.BossSpawn;
-import game.stage.EnemySpawn;
-import game.stage.PowerUpSpawn;
-import game.stage.Stage;
-import game.util.LocalTime;
-import geometry.Vector2D;
+import game.stages.BossSpawn;
+import game.stages.EnemySpawn;
+import game.stages.PowerUpSpawn;
+import game.stages.Stage;
+import game.utils.LocalTime;
 
 import java.util.ArrayList;
 

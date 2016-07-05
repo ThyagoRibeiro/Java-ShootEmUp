@@ -1,8 +1,8 @@
 package game.entities.weapons;
 
+import game.Vector2D;
 import game.entities.Entity;
 import game.entities.constants.WeaponTypeEnum;
-import geometry.Vector2D;
 
 public abstract class WeaponsFactory {
 	

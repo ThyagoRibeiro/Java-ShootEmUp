@@ -1,11 +1,11 @@
 package game.entities.enemies.enemy2;
 
+import game.Vector2D;
 import game.entities.Entity;
-import game.entities.collision.CollisionChecker;
+import game.entities.collisions.CollisionChecker;
 import game.entities.enemies.Enemy;
 import game.screenstate.MainGameScreen;
 import game.screenstate.ScreenState;
-import geometry.Vector2D;
 
 public class Enemy2 extends Enemy {
 	

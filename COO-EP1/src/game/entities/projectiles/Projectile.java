@@ -1,13 +1,13 @@
 package game.entities.projectiles;
 
+import game.Vector2D;
 import game.entities.Entity;
-import game.entities.collision.Collidable;
-import game.entities.collision.CollisionChecker;
+import game.entities.collisions.Collidable;
+import game.entities.collisions.CollisionChecker;
 import game.entities.constants.EntityTypeEnum;
 import game.entities.constants.WeaponTypeEnum;
-import game.entities.player.Player;
+import game.entities.players.Player;
 import game.screenstate.ScreenState;
-import geometry.Vector2D;
 
 public class Projectile extends Entity implements Collidable {
 

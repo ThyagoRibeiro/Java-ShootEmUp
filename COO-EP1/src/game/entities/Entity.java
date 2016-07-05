@@ -1,11 +1,11 @@
 package game.entities;
 
-import game.entities.collision.CollisionState;
+import game.Vector2D;
+import game.entities.collisions.CollisionState;
 import game.entities.constants.EntityTypeEnum;
-import game.entities.state.EntityState;
+import game.entities.states.EntityState;
 import game.screenstate.ScreenState;
-import game.util.Time;
-import geometry.Vector2D;
+import game.utils.Time;
 
 public abstract class Entity {
 

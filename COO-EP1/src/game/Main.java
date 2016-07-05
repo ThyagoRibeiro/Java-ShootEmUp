@@ -1,6 +1,6 @@
 package game;
 
-import game.stage.Stage;
+import game.stages.Stage;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
