@@ -1,12 +1,15 @@
 package game.entities.hud;
 
 import game.entities.Entity;
+import game.entities.constants.EntityTypeEnum;
 
 public class LifeBar extends Entity {
 
-	private EntityType characterType;
+	private EntityTypeEnum characterType;
 	private double maxHealthPoints;
 	private double currentHealthPoints;
+
+	// Construtor
 
 	public LifeBar(int healthPoints, Entity character) {
 		super(character.getPosition(), character.getVelocity(), character
@@ -14,24 +17,51 @@ public class LifeBar extends Entity {
 		this.characterType = character.getEntityType();
 		this.maxHealthPoints = this.currentHealthPoints = healthPoints;
 		this.state = new ActiveLifeBarState(this);
-		this.entityType = EntityType.HUD;
+		this.entityType = EntityTypeEnum.HUD;
 	}
 
-	public void decreaseCurrentHealthPoints() {
-		currentHealthPoints--;
-	}
+	/* GETTERS E SETTERS - INICIO */
 
-	public EntityType getCharacterType() {
+	public EntityTypeEnum getCharacterType() {
 		return characterType;
+	}
+
+	public void setCharacterType(EntityTypeEnum characterType) {
+		this.characterType = characterType;
+	}
+
+	public double getMaxHealthPoints() {
+		return maxHealthPoints;
+	}
+
+	public void setMaxHealthPoints(double maxHealthPoints) {
+		this.maxHealthPoints = maxHealthPoints;
 	}
 
 	public double getCurrentHealthPoints() {
 		return currentHealthPoints;
 	}
 
+	public void setCurrentHealthPoints(double currentHealthPoints) {
+		this.currentHealthPoints = currentHealthPoints;
+	}
+
+	/* GETTERS E SETTERS - FIM */
+
+	// Metodo que diminui a vida.
+	
+	public void decreaseCurrentHealthPoints() {
+		currentHealthPoints--;
+	}
+
+	// Metodo que retorna a porcentagem da barra de vida.
+	
 	public double getLifePointsPercent() {
 		return currentHealthPoints / maxHealthPoints;
 	}
+
+	// Sobrescrita dos metodos abstratos da classe Entity, para tratar a
+	// renderização e a atualização das barras de vida.
 
 	@Override
 	public void render() {

@@ -1,17 +1,18 @@
 package game.entities.hud;
 
 import game.entities.Entity;
+import game.entities.constants.EntityTypeEnum;
 import game.entities.player.Player;
 import game.util.LocalTime;
 import game.util.Time;
 
-;
-
 public class Infos extends Entity {
 
-	private LocalTime localTime = new LocalTime();
-	private int stageNumber;
 	private Player player;
+	private int stageNumber;
+	private LocalTime localTime = new LocalTime();
+
+	// Construtor
 
 	public Infos(Player player) {
 		super(player.getPosition(), player.getVelocity(), player.getRadius(),
@@ -19,20 +20,45 @@ public class Infos extends Entity {
 		this.player = player;
 		this.stageNumber = player.getMainGameScreen().getStageNumber();
 		this.state = new ActiveInfosState(this);
-		this.entityType = EntityType.HUD;
+		this.entityType = EntityTypeEnum.HUD;
 	}
+
+	/* GETTERS E SETTERS - INICIO */
 
 	public Player getPlayer() {
 		return player;
+	}
+
+	public void setPlayer(Player player) {
+		this.player = player;
 	}
 
 	public int getStageNumber() {
 		return stageNumber;
 	}
 
+	public void setStageNumber(int stageNumber) {
+		this.stageNumber = stageNumber;
+	}
+
+	public LocalTime getLocalTime() {
+		return this.localTime;
+	}
+
+	public void setLocalTime(LocalTime localTime) {
+		this.localTime = localTime;
+	}
+
+	/* GETTERS E SETTERS - FIM */
+
+	// Metodo que devolve o tempo de duração do jogo
+
 	public int getTime() {
 		return ((int) (Time.getInstance().currentTime() - localTime.getStart())) / 1000;
 	}
+
+	// Sobrescrita dos metodos abstratos da classe Entity, para tratar a
+	// renderização e a atualização das informaçoes.
 
 	@Override
 	public void render() {

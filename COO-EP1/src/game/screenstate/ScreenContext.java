@@ -3,7 +3,7 @@ package game.screenstate;
 import java.util.ArrayList;
 
 import game.GameLib;
-import stage.Stage;
+import game.stage.Stage;
 
 public class ScreenContext {
 

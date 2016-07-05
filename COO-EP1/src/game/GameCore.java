@@ -1,10 +1,10 @@
 package game;
 
-import java.util.ArrayList;
-
 import game.screenstate.ScreenContext;
+import game.stage.Stage;
 import game.util.Time;
-import stage.Stage;
+
+import java.util.ArrayList;
 
 // Classe criado para tratar as principais mecânicas do jogo.
 
@@ -31,31 +31,23 @@ public class GameCore {
 	/* maior ou igual ao instante especificado no parâmetro "time. */
 
 	public void busyWait(long time) {
-
 		while (System.currentTimeMillis() < time)
 			Thread.yield();
 	}
 
 	// Método que inicializa o jogo
 
-	public void start() {
-
+	public void init() {
 		/* Indica que o jogo está em execução */
 		boolean running = true;
-
 		GameLib.initGraphics();
-
 		ScreenContext screen = new ScreenContext(playerHealthPoints, stages);
-
 		while (running) {
-
 			Time.getInstance().updateDelta();
-
 			screen.update();
 			screen.draw();
 			busyWait(Time.getInstance().currentTime() + 5);
 		}
-
 		System.exit(0);
 	}
 }

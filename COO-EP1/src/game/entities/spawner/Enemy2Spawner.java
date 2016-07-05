@@ -1,18 +1,23 @@
 package game.entities.spawner;
 
+import game.entities.constants.WeaponTypeEnum;
 import game.entities.enemies.enemy2.Enemy2;
 import game.entities.weapons.WeaponsFactory;
-import game.entities.weapons.WeaponsFactory.WeaponType;
 import game.screenstate.MainGameScreen;
 import geometry.Vector2D;
 
 public class Enemy2Spawner extends EntitySpawner {
 
 	MainGameScreen mainGameScreen;
+	
+	// Construtor
 
 	public Enemy2Spawner(SpawnManager spawnManager, int when, int x, int y) {
 		super(spawnManager, when, x, y);
 	}
+
+	// Sobrescrita do metodo da classe abstrata EntitySpawner para inicializar o
+	// inimigo especificamente;
 
 	@Override
 	protected void spawn(int x, int y) {
@@ -26,7 +31,7 @@ public class Enemy2Spawner extends EntitySpawner {
 					Enemy2 enemy = new Enemy2(new Vector2D(x, y), velocity,
 							spawnManager.getScreenState(), mainGameScreen);
 					enemy.setWeapon(WeaponsFactory.createWeapon(
-							WeaponType.ENEMY_SHOT, enemy));
+							WeaponTypeEnum.ENEMY_SHOT, enemy));
 					try {
 						Thread.sleep(120);
 					} catch (InterruptedException e) {

@@ -1,6 +1,7 @@
 package game.entities;
 
 import game.entities.collision.CollisionState;
+import game.entities.constants.EntityTypeEnum;
 import game.entities.state.EntityState;
 import game.screenstate.ScreenState;
 import game.util.Time;
@@ -8,30 +9,115 @@ import geometry.Vector2D;
 
 public abstract class Entity {
 
-	public enum EntityType {
-		NONE, HUD, PLAYER, FRIENDLY_PROJECTILE, POWER_UP, ENEMY, ENEMY_PROJECTILE
-	}
-
-	protected CollisionState collision;
 	protected Vector2D position;
 	protected Vector2D velocity;
 	protected double radius;
 	protected ScreenState screenState;
 	protected EntityState state;
-
-	protected EntityType entityType;;
+	protected CollisionState collisionState;
+	protected EntityTypeEnum entityType = EntityTypeEnum.NONE;
+	
+	// Construtor
 
 	public Entity(Vector2D position, Vector2D velocity, double radius,
 			ScreenState screenState) {
-		this.screenState = screenState;
-		screenState.getEntityManager().addEntity(this);
-		state = null;
-		collision = null;
 		this.position = position;
 		this.velocity = velocity;
 		this.radius = radius;
-		this.entityType = EntityType.NONE;
+		this.screenState = screenState;
+		screenState.getEntityManager().addEntity(this);
+		state = null;
+		collisionState = null;
 	}
+
+	/* GETTERS E SETTERS - INICIO */
+	
+	public Vector2D getPosition() {
+		return this.position;
+	}
+
+	public void setPosition(Vector2D position) {
+		this.position = position;
+	}
+
+	public void setPositionX(float x) {
+		this.position.setCoordX(x);
+	}
+
+	public void setPositionY(float y) {
+		this.position.setCoordY(y);
+	}
+
+	public Vector2D getVelocity() {
+		return this.velocity;
+	}
+
+	public void setVelocity(Vector2D velocity) {
+		this.velocity = velocity;
+	}
+
+	public double getRadius() {
+		return this.radius;
+	}
+
+	public void setRadius(double radius) {
+		this.radius = radius;
+	}
+
+	public ScreenState getScreenState() {
+		return this.screenState;
+	}
+
+	public void setScreenState(ScreenState screenState) {
+		this.screenState = screenState;
+	}
+
+	public EntityState getState() {
+		return this.state;
+	}
+
+	public void setState(EntityState state) {
+		this.state = state;
+	}
+
+	public CollisionState getCollissionState() {
+		return this.collisionState;
+	}
+
+	public void setCollisionState(CollisionState collisionState) {
+		this.collisionState = collisionState;
+	}
+
+	public EntityTypeEnum getEntityType() {
+		return this.entityType;
+	}
+
+	public void setEntityType(EntityTypeEnum entityType) {
+		this.entityType = entityType;
+	}
+	
+	/* GETTERS E SETTERS - FIM */
+	
+	// Metodo que remove a entidade através do EntityManager.
+
+	public void removeEntity() {
+		screenState.getEntityManager().remove(this);
+	}
+	
+	// Metodo que atualiza a posição da entidade.
+
+	public void updateEntityPosition() {
+		this.position = this.position.add(velocity.multiply(Time.getInstance()
+				.deltaTime()));
+	}
+
+	// Metodos abstratos de renderização e atualização
+
+	public abstract void render();
+
+	public abstract void update();
+
+	// Metodos sobrescritos da classe Object.
 
 	@Override
 	public boolean equals(Object obj) {
@@ -66,33 +152,9 @@ public abstract class Entity {
 		return true;
 	}
 
-	public EntityType getEntityType() {
-		return this.entityType;
-	}
-
-	public Vector2D getPosition() {
-		return this.position;
-	}
-
-	public double getRadius() {
-		return this.radius;
-	}
-
-	public ScreenState getScreenState() {
-		return this.screenState;
-	}
-
-	public EntityState getState() {
-		return this.state;
-	}
-
-	public Vector2D getVelocity() {
-		return this.velocity;
-	}
-
 	@Override
 	public int hashCode() {
-		final int prime = 31;
+		final int prime = 37;
 		int result = 1;
 		result = prime * result
 				+ ((position == null) ? 0 : position.hashCode());
@@ -100,40 +162,6 @@ public abstract class Entity {
 		result = prime * result
 				+ ((velocity == null) ? 0 : velocity.hashCode());
 		return result;
-	}
-
-	public void remove() {
-		screenState.getEntityManager().remove(this);
-	}
-
-	public abstract void render();
-
-	public void setCollisionState(CollisionState collisionState) {
-		this.collision = collisionState;
-	}
-
-	public void setPosition(Vector2D position) {
-		this.position = position;
-	}
-
-	public void setState(EntityState state) {
-
-		this.state = state;
-	}
-
-	public void setX(float x) {
-		this.position.setX(x);
-	}
-
-	public void setY(float y) {
-		this.position.setY(y);
-	}
-
-	public abstract void update();
-
-	public void updatePosition() {
-		this.position = this.position.add(velocity.multiply(Time.getInstance()
-				.deltaTime()));
 	}
 
 }
