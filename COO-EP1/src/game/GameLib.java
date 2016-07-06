@@ -47,7 +47,7 @@ public class GameLib {
 
 	public static void initGraphics() {
 
-		frame = new MyFrame("Projeto COO");
+		frame = new MyFrame("EP COO - Shoot 'Em Up");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(WIDTH, HEIGHT);
 		frame.setResizable(false);
