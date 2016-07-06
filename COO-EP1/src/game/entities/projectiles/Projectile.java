@@ -35,7 +35,7 @@ public class Projectile extends Entity implements Collidable {
 			this.entityType = EntityTypeEnum.ENEMY_PROJECTILE;
 			velocity.setCoordYToPositive();
 		}
-		this.state = new ActiveProjectileState(this);
+		this.state = new ProjectileState(this);
 	}
 
 	/* GETTERS E SETTERS - INICIO */

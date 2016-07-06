@@ -37,7 +37,7 @@ public class Player extends Entity implements Collidable {
 		this.mainGameScreen = mainGameScreen;
 		position.setCoordXY((GameLib.WIDTH - (float) radius) / 2.0f,
 				GameLib.HEIGHT * 0.9f);
-		this.setState(new ActivePlayerState(this));
+		this.setState(new PlayerState(this));
 
 		screenState.getEntityManager().setPlayer(this);
 		this.collisionState = new PlayerCollisionState(this);

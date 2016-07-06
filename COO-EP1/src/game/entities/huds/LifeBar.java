@@ -16,7 +16,7 @@ public class LifeBar extends Entity {
 				.getRadius(), character.getScreenState());
 		this.characterType = character.getEntityType();
 		this.maxHealthPoints = this.currentHealthPoints = healthPoints;
-		this.state = new ActiveLifeBarState(this);
+		this.state = new LifeBarState(this);
 		this.entityType = EntityTypeEnum.HUD;
 	}
 

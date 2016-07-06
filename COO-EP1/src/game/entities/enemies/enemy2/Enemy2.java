@@ -14,7 +14,7 @@ public class Enemy2 extends Enemy {
 	public Enemy2(Vector2D position, Vector2D velocity,
 			ScreenState screenState, MainGameScreen mainGameScreen) {
 		super(position, velocity, 9.0, screenState, 3 * Math.PI / 2, 0.0);
-		this.state = new ActiveEnemy2State(this);
+		this.state = new Enemy2State(this);
 		this.collisionState = new Enemy2CollisionState(this);
 	}
 

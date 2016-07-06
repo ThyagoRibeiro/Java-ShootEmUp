@@ -27,7 +27,7 @@ public class Boss2 extends Enemy {
 				3 * Math.PI / 2, 0.0);
 		lifeBar = new LifeBar(healthPoints, this);
 		currentColor = normalColor;
-		this.state = new ActiveBoss2State(this);
+		this.state = new Boss2State(this);
 		this.collisionState = new Boss2CollisionState(this);
 		this.entityType = EntityTypeEnum.ENEMY;
 	}

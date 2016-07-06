@@ -4,13 +4,13 @@ import game.GameLib;
 import game.entities.states.EntityState;
 import game.utils.Time;
 
-public class ActivePlayerState implements EntityState {
+public class PlayerState implements EntityState {
 
 	private Player context;
 
 	// Construtor
 
-	public ActivePlayerState(Player context) {
+	public PlayerState(Player context) {
 		this.context = context;
 	}
 

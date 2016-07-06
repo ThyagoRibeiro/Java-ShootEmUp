@@ -16,7 +16,7 @@ public class Enemy1 extends Enemy {
 		super(position, new Vector2D((float) (0.05 + Math.random() * 0.10),
 				(float) (0.05 + Math.random() * 0.10)), 9.0, screenState,
 				3 * Math.PI / 2, 0.0);
-		this.state = new ActiveEnemy1State(this);
+		this.state = new Enemy1State(this);
 		this.collisionState = new Enemy1CollisionState(this);
 	}
 

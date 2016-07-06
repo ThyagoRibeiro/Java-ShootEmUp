@@ -19,7 +19,7 @@ public class Infos extends Entity {
 				player.getScreenState());
 		this.player = player;
 		this.stageNumber = player.getMainGameScreen().getStageNumber();
-		this.state = new ActiveInfosState(this);
+		this.state = new InfosState(this);
 		this.entityType = EntityTypeEnum.HUD;
 	}
 

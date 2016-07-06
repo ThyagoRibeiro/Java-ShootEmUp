@@ -5,7 +5,7 @@ import game.Vector2D;
 import game.entities.states.EntityState;
 import game.utils.LocalTime;
 
-public class ActiveBoss2State implements EntityState {
+public class Boss2State implements EntityState {
 
 	private Boss2 context;
 	private boolean goingRight;
@@ -14,7 +14,7 @@ public class ActiveBoss2State implements EntityState {
 
 	// Construtor
 
-	public ActiveBoss2State(Boss2 context) {
+	public Boss2State(Boss2 context) {
 		this.context = context;
 		goingRight = true;
 		shootTime = new LocalTime(Math.random() * waitTime);

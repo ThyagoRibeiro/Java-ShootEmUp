@@ -6,13 +6,13 @@ import game.entities.states.EntityState;
 
 import java.awt.Color;
 
-public class ActiveLifeBarState implements EntityState {
+public class LifeBarState implements EntityState {
 
 	private LifeBar context;
 
 	// Construtor
 
-	public ActiveLifeBarState(LifeBar context) {
+	public LifeBarState(LifeBar context) {
 		this.context = context;
 	}
 

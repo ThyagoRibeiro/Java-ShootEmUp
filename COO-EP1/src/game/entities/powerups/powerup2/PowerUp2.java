@@ -16,7 +16,7 @@ public class PowerUp2 extends PowerUp {
 		super(position, new Vector2D((float) (0.05 + Math.random() * 0.10),
 				(float) (0.05 + Math.random() * 0.10)), 9.0, screenState,
 				3 * Math.PI / 2, 0.0);
-		this.state = new ActivePowerUp2State(this);
+		this.state = new PowerUp2State(this);
 		this.collisionState = new PowerUp2CollisionState(this);
 	}
 

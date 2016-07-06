@@ -7,13 +7,13 @@ import game.utils.Time;
 
 import java.awt.Color;
 
-public class ActivePowerUp2State implements EntityState {
+public class PowerUp2State implements EntityState {
 
 	private PowerUp2 context;
 
 	// Construtor
 
-	public ActivePowerUp2State(PowerUp2 context) {
+	public PowerUp2State(PowerUp2 context) {
 		this.context = context;
 	}
 

@@ -3,13 +3,13 @@ package game.entities.huds;
 import game.GameLib;
 import game.entities.states.EntityState;
 
-public class ActiveInfosState implements EntityState {
+public class InfosState implements EntityState {
 
 	private Infos context;
 
 	// Construtor
 
-	public ActiveInfosState(Infos context) {
+	public InfosState(Infos context) {
 		this.context = context;
 	}
 
